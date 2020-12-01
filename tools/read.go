@@ -2,17 +2,18 @@ package tools
 
 import (
 	"bufio"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
 func ReadBytes(location string) []byte {
 	bytes, err := ioutil.ReadFile(location)
 	if err != nil {
-		fmt.Print(err)
+		log.Fatal(err)
 	}
 	return bytes
 }
@@ -20,7 +21,7 @@ func ReadBytes(location string) []byte {
 func ReadLines(location string) *bufio.Scanner {
 	file, err := os.Open(location)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -28,7 +29,10 @@ func ReadLines(location string) *bufio.Scanner {
 }
 
 func ReadRegex(location string, regex string) []map[string]string {
-	content, _ := ioutil.ReadFile(location)
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
 	lines := strings.Split(string(content), "\n")
 
 	compRegEx := regexp.MustCompile(regex)
@@ -46,4 +50,21 @@ func ReadRegex(location string, regex string) []map[string]string {
 		results = append(results, resultsMap)
 	}
 	return results
+}
+
+func ReadInts(location string) []int {
+	var ints []int
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+
+	for _, line := range lines {
+		i, err := strconv.Atoi(line)
+		if err == nil {
+			ints = append(ints, i)
+		}
+	}
+	return ints
 }
