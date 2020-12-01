@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ldej/advent-of-code-2017/common"
+	"github.com/ldej/advent-of-code/2017/common"
 )
 
 var configurations [][]int

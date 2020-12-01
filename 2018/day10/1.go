@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code-2018/common"
+	"github.com/ldej/advent-of-code/2018/common"
 		"strconv"
 		"strings"
 	"fmt"

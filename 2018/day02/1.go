@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-		"github.com/ldej/advent-of-code-2018/common"
+		"github.com/ldej/advent-of-code/2018/common"
 )
 
 func main() {

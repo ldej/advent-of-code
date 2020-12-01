@@ -1,4 +1,4 @@
-package common
+package tools
 
 import (
 	"bufio"

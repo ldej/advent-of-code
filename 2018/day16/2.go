@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ldej/advent-of-code-2018/common"
+	"github.com/ldej/advent-of-code/2018/common"
 	"fmt"
 )
 
