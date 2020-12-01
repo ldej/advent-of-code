@@ -68,3 +68,11 @@ func ReadInts(location string) []int {
 	}
 	return ints
 }
+
+func ReadStrings(location string) []string {
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return strings.Split(string(content), "\n")
+}
