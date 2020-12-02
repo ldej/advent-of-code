@@ -57,6 +57,7 @@ func ReadRegex(location string, regex string) []map[string]string {
 
 func ReadInts(location string) []int {
 	var ints []int
+
 	content, err := ioutil.ReadFile(location)
 	if err != nil {
 		log.Fatal(err)
@@ -64,6 +65,9 @@ func ReadInts(location string) []int {
 	lines := strings.Split(string(content), "\n")
 
 	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
 		i, err := strconv.Atoi(line)
 		if err == nil {
 			ints = append(ints, i)
@@ -72,10 +76,98 @@ func ReadInts(location string) []int {
 	return ints
 }
 
+func ReadIntSlice(location string) []int {
+	return ReadIntSlices(location)[0]
+}
+
+func ReadIntSlices(location string) [][]int {
+	var result [][]int
+
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+
+	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
+
+		fields := strings.Fields(line)
+		var ints []int
+		for _, field := range fields {
+			i, _ := strconv.Atoi(field)
+			ints = append(ints, i)
+		}
+		result = append(result, ints)
+	}
+	return result
+}
+
+func ReadIntCsv(location string) [][]int {
+	var result [][]int
+
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+
+	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
+
+		// strings.Split instead of strings.Fields
+		fields := strings.Split(line, ",")
+		var ints []int
+		for _, field := range fields {
+			// Trim space
+			i, _ := strconv.Atoi(strings.TrimSpace(field))
+			ints = append(ints, i)
+		}
+		result = append(result, ints)
+	}
+	return result
+}
+
 func ReadStrings(location string) []string {
 	content, err := ioutil.ReadFile(location)
 	if err != nil {
 		log.Fatal(err)
 	}
-	return strings.Split(string(content), "\n")
+	return strings.Split(strings.TrimSuffix(string(content), "\n"), "\n")
+}
+
+func ReadStringSlices(location string) [][]string {
+	var result [][]string
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
+		result = append(result, strings.Fields(line))
+	}
+	return result
+}
+
+func ReadRuneGrid(location string) RuneGrid {
+	var result RuneGrid
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
+		result = append(result, []rune(line))
+	}
+	return result
 }
