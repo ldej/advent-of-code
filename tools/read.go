@@ -40,6 +40,9 @@ func ReadRegex(location string, regex string) []map[string]string {
 	var results []map[string]string
 
 	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
 		match := compRegEx.FindStringSubmatch(line)
 		resultsMap := make(map[string]string)
 		for i, name := range compRegEx.SubexpNames() {
