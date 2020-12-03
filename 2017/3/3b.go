@@ -12,6 +12,7 @@ func main() {
 	grid.print()
 
 }
+
 func findLargerValue(input int) (Grid, int) {
 	width := 5
 	row := 2
