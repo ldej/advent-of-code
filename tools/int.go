@@ -21,6 +21,18 @@ func MaxList(ints []int) int {
 	return max
 }
 
+func MaxListIndex(ints []int) int {
+	max := ints[0]
+	index := 0
+	for i, value := range ints {
+		if value > max {
+			max = value
+			index = i
+		}
+	}
+	return index
+}
+
 func MaxVar(ints ...int) int {
 	return MaxList(ints)
 }
@@ -40,6 +52,18 @@ func MinList(ints []int) int {
 		}
 	}
 	return min
+}
+
+func MinListIndex(ints []int) int {
+	min := ints[0]
+	index := 0
+	for i, value := range ints {
+		if value < min {
+			min = value
+			index = i
+		}
+	}
+	return index
 }
 
 func MinVar(ints ...int) int {
@@ -68,7 +92,7 @@ func Abs(x int) int {
 	return x
 }
 
-func ManhattanDistance(x1,y1, x2, y2 int) int {
+func ManhattanDistance(x1, y1, x2, y2 int) int {
 	x := 0
 	if x1 > x2 {
 		x = x1 - x2
@@ -82,4 +106,41 @@ func ManhattanDistance(x1,y1, x2, y2 int) int {
 		y = y2 - y1
 	}
 	return x + y
+}
+
+func IntsProduct(ints []int) int {
+	result := 1
+	for _, i := range ints {
+		result *= i
+	}
+	return result
+}
+
+func IntsSum(ints []int) int {
+	result := 0
+	for _, i := range ints {
+		result += i
+	}
+	return result
+}
+
+func IntSlicesEqual(a []int, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func IntSliceContains(a []int, b int) bool {
+	for _, i := range a {
+		if i == b {
+			return true
+		}
+	}
+	return false
 }

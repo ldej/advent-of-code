@@ -132,6 +132,14 @@ func ReadIntCsv(location string) [][]int {
 	return result
 }
 
+func ReadIntCsvOneLine(location string) []int {
+	return ReadIntCsv(location)[0]
+}
+
+func ReadString(location string) string {
+	return ReadStrings(location)[0]
+}
+
 func ReadStrings(location string) []string {
 	content, err := ioutil.ReadFile(location)
 	if err != nil {

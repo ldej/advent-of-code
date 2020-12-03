@@ -20,6 +20,46 @@ func (g IntGrid) Set(rowIndex, columnIndex int, value int) {
 	g[rowIndex][columnIndex] = value
 }
 
+// MaxWindowSum calculates the sum of all cells for a moving window
+// it returns the x and y index of the top left corner of the
+// window with the highest sum and the sum value
+func (g IntGrid) MaxWindowSum(windowHeight int, windowWidth int) (int, int, int) {
+	maxSum := 0
+	x := 0
+	y := 0
+
+	gridHeight := len(g)
+	gridWidth := len(g[0])
+
+	for i := 0; i < gridHeight-windowHeight+1; i++ {
+		for j := 0; j < gridWidth-windowWidth+1; j++ {
+			if sum := g.WindowSum(windowHeight, windowWidth, i, j); sum > maxSum {
+				maxSum = sum
+				x = i
+				y = j
+			}
+		}
+	}
+	return x, y, maxSum
+}
+
+// WindowSum returns the sum of the integers within the specified window
+// The x and y parameters are for the top left corner of the window
+func (g IntGrid) WindowSum(windowHeight int, windowWidth int, x, y int) int {
+	sum := 0
+	height := len(g)
+	width := len(g[0])
+
+	for i := x; i < x+windowHeight; i++ {
+		for j := y; j < y+windowWidth; j++ {
+			if i < height && j < width {
+				sum += g[i][j]
+			}
+		}
+	}
+	return sum
+}
+
 // GrowAll grows in all directions in one run
 func (g IntGrid) GrowAll(defaultValue int) IntGrid {
 	var newGrid = make(IntGrid, len(g), len(g))

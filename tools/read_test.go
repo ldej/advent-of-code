@@ -47,6 +47,13 @@ func TestReadIntCsv(t *testing.T) {
 	assert.Equal(t, expected, ints)
 }
 
+func TestReadIntCsvOneLine(t *testing.T) {
+	ints := ReadIntCsvOneLine("./testdata/int_csv2.txt")
+
+	expected := []int{1, 0, 0, 3, 1, 1, -2, 3, 1, 3, 4, 3}
+	assert.Equal(t, expected, ints)
+}
+
 func TestReadStrings(t *testing.T) {
 	strings := ReadStrings("./testdata/strings.txt")
 
@@ -71,6 +78,12 @@ func TestReadStringSlices(t *testing.T) {
 	}
 
 	assert.Equal(t, expected, strings)
+}
+
+func TestReadString(t *testing.T) {
+	str := ReadString("./testdata/string.txt")
+
+	assert.Equal(t, "wWuUJjXxqQrqQmKBzZbZzLlkWNqQntxXBZzM", str)
 }
 
 func TestReadRuneGrid(t *testing.T) {
