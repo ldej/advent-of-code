@@ -1,7 +1,10 @@
 package tools
 
 import (
+	"fmt"
+	"log"
 	"math"
+	"strconv"
 )
 
 func Max(x, y int) int {
@@ -143,4 +146,50 @@ func IntSliceContains(a []int, b int) bool {
 		}
 	}
 	return false
+}
+
+func ToInt(a string) int {
+	v, err := strconv.Atoi(a)
+	if err != nil {
+		log.Fatalf("tools.ToInt: not an int: %q", a)
+	}
+	return v
+}
+
+func InRange(value int, min int, max int) bool {
+	if min >= max {
+		log.Fatalf("tools.InRange: min is bigger or equal to max: min=%d max=%d", min, max)
+	}
+	if value < min || value > max {
+		return false
+	}
+	return true
+}
+
+func OutRange(value int, min int, max int) bool {
+	if min >= max {
+		log.Fatalf("tools.OutRange: min is bigger or equal to max: min=%d max=%d", min, max)
+	}
+	if value > min && value < max {
+		return false
+	}
+	return true
+}
+
+func IntLength(value int) int {
+	return len(fmt.Sprintf("%d", value))
+}
+
+func IntIndex(value int, index int) int {
+	return IntToSlice(value)[index]
+}
+
+func IntToSlice(value int) []int {
+	str := strconv.Itoa(value)
+	var ints []int
+	for _, i := range str {
+		a, _ := strconv.Atoi(string(i))
+		ints = append(ints, a)
+	}
+	return ints
 }

@@ -164,6 +164,22 @@ func ReadStringSlices(location string) [][]string {
 	return result
 }
 
+func ReadStringDoubleNewlines(location string) []string {
+	var result []string
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n\n")
+	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
+		result = append(result, strings.Trim(line, "\n"))
+	}
+	return result
+}
+
 func ReadRuneGrid(location string) RuneGrid {
 	var result RuneGrid
 	content, err := ioutil.ReadFile(location)
