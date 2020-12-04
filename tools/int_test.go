@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -50,6 +51,11 @@ func TestOutRange(t *testing.T) {
 
 func TestIntLength(t *testing.T) {
 	assert.Equal(t, 5, IntLength(12345))
+}
+
+func ExampleIntLength() {
+	fmt.Println(IntLength(12345))
+	// Output: 5
 }
 
 func TestIntIndex(t *testing.T) {

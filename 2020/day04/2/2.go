@@ -21,13 +21,13 @@ func run() int {
 	requiredKeys := []string{"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"}
 
 	for _, line := range lines {
-		line = strings.Replace(line, "\n", " ", -1)
+		passport := strings.Replace(line, "\n", " ", -1)
 
-		if !ContainsKeys(line, requiredKeys) {
+		if !ContainsKeys(passport, requiredKeys) {
 			continue
 		}
 
-		if !KeysAreCorrect(line) {
+		if !PassportIsCorrect(passport) {
 			continue
 		}
 		valid += 1
@@ -44,20 +44,20 @@ func ContainsKeys(line string, keys []string) bool {
 	return true
 }
 
-func KeysAreCorrect(line string) bool {
+func PassportIsCorrect(line string) bool {
 	keyValues := strings.Split(line, " ")
 
 	for _, keyValue := range keyValues {
 		split := strings.Split(keyValue, ":")
 
-		if !KeyIsCorrect(split[0], split[1]) {
+		if !IsValid(split[0], split[1]) {
 			return false
 		}
 	}
 	return true
 }
 
-func KeyIsCorrect(key string, value string) bool {
+func IsValid(key string, value string) bool {
 	switch key {
 	case "byr":
 		return tools.InRange(tools.ToInt(value), 1920, 2002)

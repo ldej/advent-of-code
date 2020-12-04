@@ -111,6 +111,7 @@ func ManhattanDistance(x1, y1, x2, y2 int) int {
 	return x + y
 }
 
+// IntsProduct multiplies all the ints in a slice
 func IntsProduct(ints []int) int {
 	result := 1
 	for _, i := range ints {
@@ -119,6 +120,7 @@ func IntsProduct(ints []int) int {
 	return result
 }
 
+// IntsSum adds up all the ints a slice
 func IntsSum(ints []int) int {
 	result := 0
 	for _, i := range ints {
@@ -127,6 +129,7 @@ func IntsSum(ints []int) int {
 	return result
 }
 
+// IntSlicesEqual checks if two integer slices are equal
 func IntSlicesEqual(a []int, b []int) bool {
 	if len(a) != len(b) {
 		return false
@@ -139,6 +142,7 @@ func IntSlicesEqual(a []int, b []int) bool {
 	return true
 }
 
+// IntSliceContains checks if an integer is part of a slice
 func IntSliceContains(a []int, b int) bool {
 	for _, i := range a {
 		if i == b {
@@ -148,6 +152,7 @@ func IntSliceContains(a []int, b int) bool {
 	return false
 }
 
+// ToInt converts a string to int and will log.Fatalf when it fails
 func ToInt(a string) int {
 	v, err := strconv.Atoi(a)
 	if err != nil {
@@ -156,6 +161,7 @@ func ToInt(a string) int {
 	return v
 }
 
+// InRange from min to max including min and max
 func InRange(value int, min int, max int) bool {
 	if min >= max {
 		log.Fatalf("tools.InRange: min is bigger or equal to max: min=%d max=%d", min, max)
@@ -166,24 +172,34 @@ func InRange(value int, min int, max int) bool {
 	return true
 }
 
+// OutRange lower than min or higher than max
 func OutRange(value int, min int, max int) bool {
 	if min >= max {
 		log.Fatalf("tools.OutRange: min is bigger or equal to max: min=%d max=%d", min, max)
 	}
-	if value > min && value < max {
+	if value >= min && value <= max {
 		return false
 	}
 	return true
 }
 
+// IntLength length of and integer
+//
+// example: IntLength(12345) == 5
 func IntLength(value int) int {
 	return len(fmt.Sprintf("%d", value))
 }
 
+// IntIndex the digit on index n of an integer
+//
+// example: IntIndex(12345, 1) == 2
 func IntIndex(value int, index int) int {
 	return IntToSlice(value)[index]
 }
 
+// IntToSlice convert an int to its separate digits
+//
+// example: IntToSlice(12345) == []int{1, 2, 3, 4, 5}
 func IntToSlice(value int) []int {
 	str := strconv.Itoa(value)
 	var ints []int

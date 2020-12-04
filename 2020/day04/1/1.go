@@ -20,9 +20,9 @@ func run() int {
 	requiredKeys := []string{"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"}
 
 	for _, line := range lines {
-		line = strings.Replace(line, "\n", " ", -1)
+		passport := strings.Replace(line, "\n", " ", -1)
 
-		if !ContainsKeys(line, requiredKeys) {
+		if !ContainsKeys(passport, requiredKeys) {
 			continue
 		}
 		valid += 1
