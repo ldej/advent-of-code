@@ -13,9 +13,9 @@ func main() {
 }
 
 func run() int {
-	example := tools.ReadStrings("./2020/day07/input.txt")
+	input := tools.ReadStrings("./2020/day07/input.txt")
 
-	bags := BagsMap(example)
+	bags := BagsMap(input)
 
 	canHoldShinyGold := 0
 	for bag := range bags {
@@ -46,16 +46,11 @@ func BagsMap(input []string) map[string][]string {
 		statements := strings.Split(line, " bags contain ")
 
 		color, rest := statements[0], statements[1]
-		bags := strings.Split(strings.TrimSuffix(rest, "."), ", ")
 
-		for _, b := range bags {
-			if b == "no other bags" {
-				bagsMap[color] = []string{}
-			} else {
-				res := strings.SplitN(strings.Trim(b, " "), " ", 2)
-				r := strings.TrimSuffix(strings.TrimSuffix(res[1], " bags"), " bag")
-				bagsMap[color] = append(bagsMap[color], r)
-			}
+		bags := tools.RegexNamedGroupsRepeat(rest, `(?P<count>\d+) (?P<color>.*?) bag`)
+
+		for _, bag := range bags {
+			bagsMap[color] = append(bagsMap[color], bag["color"])
 		}
 	}
 	return bagsMap

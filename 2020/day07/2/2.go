@@ -28,7 +28,7 @@ func run() int {
 }
 
 func Count(all map[string][]Bag, bag Bag) int {
-	contains := 0
+	var contains int
 	for _, b := range all[bag.Color] {
 		contains += b.Count + b.Count*Count(all, b)
 	}
@@ -37,22 +37,21 @@ func Count(all map[string][]Bag, bag Bag) int {
 
 func BagsMap(input []string) map[string][]Bag {
 	bagsMap := map[string][]Bag{}
-
 	for _, line := range input {
 		statements := strings.Split(line, " bags contain ")
 
 		color, rest := statements[0], statements[1]
 
-		bags := strings.Split(strings.TrimSuffix(rest, "."), ", ")
+		bags := tools.RegexNamedGroupsRepeat(rest, `(?P<count>\d+) (?P<color>.*?) bag`)
 
-		for _, b := range bags {
-			if b == "no other bags" {
-				bagsMap[color] = []Bag{}
-			} else {
-				res := strings.SplitN(strings.Trim(b, " "), " ", 2)
-				r := strings.TrimSuffix(strings.TrimSuffix(res[1], " bags"), " bag")
-				bagsMap[color] = append(bagsMap[color], Bag{r, tools.ToInt(res[0])})
-			}
+		for _, bag := range bags {
+			bagsMap[color] = append(
+				bagsMap[color],
+				Bag{
+					Color: bag["color"],
+					Count: tools.ToInt(bag["count"]),
+				},
+			)
 		}
 	}
 	return bagsMap
