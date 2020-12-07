@@ -209,3 +209,19 @@ func IntToSlice(value int) []int {
 	}
 	return ints
 }
+
+func GreatestCommonDivisor(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
+}
+
+func GreatestCommonDivisorSlice(numbers []int) int {
+	var gcd = numbers[0]
+	for i := 1; i < len(numbers); i++ {
+		number := numbers[i]
+		gcd = GreatestCommonDivisor(gcd, number)
+	}
+	return gcd
+}

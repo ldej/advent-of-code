@@ -67,3 +67,11 @@ func TestIntToSlice(t *testing.T) {
 	assert.Equal(t, []int{1, 2, 3}, IntToSlice(123))
 	assert.Equal(t, []int{1, 2, 3, 4, 5}, IntToSlice(12345))
 }
+
+func TestGreatestCommonDivisor(t *testing.T) {
+	assert.Equal(t, 3, GreatestCommonDivisor(9, 24))
+}
+
+func TestGreatestCommonDivisorSlice(t *testing.T) {
+	assert.Equal(t, 3, GreatestCommonDivisorSlice([]int{9, 24, 30}))
+}
