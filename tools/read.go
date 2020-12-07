@@ -164,7 +164,7 @@ func ReadStringSlices(location string) [][]string {
 	return result
 }
 
-func ReadStringDoubleNewlines(location string) []string {
+func ReadStringsDoubleNewlines(location string) []string {
 	var result []string
 	content, err := ioutil.ReadFile(location)
 	if err != nil {

@@ -48,3 +48,15 @@ func TestStringRemoveDuplicates(t *testing.T) {
 
 	assert.Equal(t, expected, result)
 }
+
+func TestStringsIntersection(t *testing.T) {
+	result := StringsIntersection([]string{"ffekaasfsef", "friaagrjijqw", "aygbffdaywgbd", "adhvthwfd"})
+
+	assert.Equal(t, []rune{'f', 'a'}, result)
+}
+
+func TestStringsUnion(t *testing.T) {
+	result := StringsUnion([]string{"ffekaasfsef", "friaagrjijqw", "aygbffdaywgbd", "adhvthwfd"})
+
+	assert.Equal(t, []rune("abdefghijkstywv"), result)
+}

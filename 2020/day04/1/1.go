@@ -13,7 +13,7 @@ func main() {
 }
 
 func run() int {
-	lines := tools.ReadStringDoubleNewlines("./2020/day04/input.txt")
+	lines := tools.ReadStringsDoubleNewlines("./2020/day04/input.txt")
 
 	valid := 0
 

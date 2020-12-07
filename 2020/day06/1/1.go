@@ -13,26 +13,14 @@ func main() {
 }
 
 func run() int {
-	lines := tools.ReadStringDoubleNewlines("./2020/day06/input.txt")
+	lines := tools.ReadStringsDoubleNewlines("./2020/day06/input.txt")
 
 	total := 0
 
 	for _, line := range lines {
 		people := strings.Split(line, "\n")
-		total += CountUniqueAnswers(people)
+		total += len(tools.StringsIntersection(people))
 	}
 
 	return total
-}
-
-func CountUniqueAnswers(people []string) int {
-	answers := map[rune]bool{}
-
-	for _, person := range people {
-		for _, answer := range person {
-			answers[answer] = true
-		}
-	}
-
-	return len(answers)
 }
