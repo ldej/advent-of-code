@@ -36,6 +36,9 @@ func run() int {
 			updated[i].Op = "nop"
 		} else if updated[i].Op == "nop" {
 			updated[i].Op = "jmp"
+		} else {
+			// nothing changed
+			continue
 		}
 
 		accumulator, terminated := RunInstructions(updated)
