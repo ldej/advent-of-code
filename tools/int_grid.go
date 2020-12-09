@@ -47,17 +47,40 @@ func (g IntGrid) MaxWindowSum(windowHeight int, windowWidth int) (int, int, int)
 // The x and y parameters are for the top left corner of the window
 func (g IntGrid) WindowSum(windowHeight int, windowWidth int, x, y int) int {
 	sum := 0
-	height := len(g)
-	width := len(g[0])
 
-	for i := x; i < x+windowHeight; i++ {
-		for j := y; j < y+windowWidth; j++ {
-			if i < height && j < width {
-				sum += g[i][j]
-			}
+	window := g.Window(windowHeight, windowWidth, x, y)
+	height := len(window)
+	width := len(window[0])
+
+	for i := 0; i < height; i++ {
+		for j := 0; j < width; j++ {
+			sum += window[i][j]
 		}
 	}
 	return sum
+}
+
+func (g IntGrid) Window(windowHeight int, windowWidth int, x, y int) IntGrid {
+	var window IntGrid
+
+	for i := x; i < x+windowHeight; i++ {
+		window = append(window, g[i][y:y+windowWidth])
+	}
+	return window
+}
+
+func (g IntGrid) Windows(windowHeight int, windowWidth int) chan IntGrid {
+	ch := make(chan IntGrid)
+
+	go func() {
+		for i := 0; i <= len(g)-windowHeight; i++ {
+			for j := 0; j <= len(g[0])-windowWidth; j++ {
+				ch <- g.Window(windowHeight, windowWidth, i, j)
+			}
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 // GrowAll grows in all directions in one run

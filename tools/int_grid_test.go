@@ -129,6 +129,53 @@ func BenchmarkIntGrid_PGrow(b *testing.B) {
 	}
 }
 
+func TestIntGrid_Window(t *testing.T) {
+	grid := IntGrid{
+		[]int{0, 0, 0, 0, 0, 0, 0},
+		[]int{0, 0, 1, 1, 1, 0, 0},
+		[]int{0, 0, 1, 1, 1, 0, 0},
+		[]int{0, 0, 0, 0, 0, 0, 0},
+		[]int{0, 0, 0, 0, 0, 0, 0},
+		[]int{0, 0, 0, 0, 0, 0, 0},
+		[]int{0, 0, 0, 0, 0, 0, 0},
+	}
+
+	window := grid.Window(2, 3, 1, 2)
+
+	expected := IntGrid{
+		{1, 1, 1},
+		{1, 1, 1},
+	}
+
+	assert.Equal(t, expected, window)
+}
+
+func TestIntGrid_Windows(t *testing.T) {
+	grid := IntGrid{
+		[]int{1, 2, 3, 4, 5, 6, 7},
+		[]int{1, 2, 3, 4, 5, 6, 7},
+		[]int{1, 2, 3, 4, 5, 6, 7},
+		[]int{1, 2, 3, 4, 5, 6, 7},
+		[]int{1, 2, 3, 4, 5, 6, 7},
+		[]int{1, 2, 3, 4, 9, 6, 7},
+		[]int{1, 2, 3, 4, 5, 6, 7},
+	}
+
+	var windows []IntGrid
+
+	for window := range grid.Windows(1, 1) {
+		windows = append(windows, window)
+	}
+	assert.Len(t, windows, 49)
+
+	windows = []IntGrid{}
+
+	for window := range grid.Windows(2, 2) {
+		windows = append(windows, window)
+	}
+	assert.Len(t, windows, 36)
+}
+
 func TestIntGrid_WindowSum(t *testing.T) {
 	grid := IntGrid{
 		[]int{70, 0, 0, 0, 0, 0, 0},

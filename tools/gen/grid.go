@@ -44,6 +44,29 @@ func (g {{.Name}}Grid) Set(rowIndex, columnIndex int, value {{.Type}}) {
 	g[rowIndex][columnIndex] = value
 }
 
+func (g {{.Name}}Grid) Window(windowHeight int, windowWidth int, x, y int) {{.Name}}Grid {
+	var window [][]{{.Type}}
+
+	for i := x; i < x+windowHeight; i++ {
+		window = append(window, g[i][y:y+windowWidth])
+	}
+	return window
+}
+
+func (g {{.Name}}Grid) Windows(windowHeight int, windowWidth int) chan {{.Name}}Grid {
+	ch := make(chan {{.Name}}Grid)
+
+	go func() {
+		for i := 0; i <= len(g)-windowHeight; i++ {
+			for j := 0; j <= len(g[0])-windowWidth; j++ {
+				ch <- g.Window(windowHeight, windowWidth, i, j)
+			}
+		}
+		close(ch)
+	}()
+	return ch
+}
+
 // GrowAll grows in all directions in one run
 func (g {{.Name}}Grid) GrowAll(defaultValue {{.Type}}) {{.Name}}Grid {
 	var newGrid = make({{.Name}}Grid, len(g), len(g))
