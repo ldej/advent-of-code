@@ -59,8 +59,8 @@ func ExampleIntLength() {
 }
 
 func TestIntIndex(t *testing.T) {
-	assert.Equal(t, 3, IntIndex(123, 2))
-	assert.Equal(t, 4, IntIndex(123456789, 3))
+	assert.Equal(t, 3, IntDigitIndex(123, 2))
+	assert.Equal(t, 4, IntDigitIndex(123456789, 3))
 }
 
 func TestIntToSlice(t *testing.T) {
@@ -74,4 +74,12 @@ func TestGreatestCommonDivisor(t *testing.T) {
 
 func TestGreatestCommonDivisorSlice(t *testing.T) {
 	assert.Equal(t, 3, GreatestCommonDivisorSlice([]int{9, 24, 30}))
+}
+
+func TestMapInts(t *testing.T) {
+	result := MapInts([]int{1, 2, 3, 4}, func(i, value int) int {
+		return value * value
+	})
+
+	assert.Equal(t, []int{1, 4, 9, 16}, result)
 }

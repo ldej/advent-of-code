@@ -56,7 +56,7 @@ func TestStringsIntersection(t *testing.T) {
 }
 
 func TestStringsUnion(t *testing.T) {
-	result := StringsUnion([]string{"ffekaasfsef", "friaagrjijqw", "aygbffdaywgbd", "adhvthwfd"})
+	result := StringsUnion([]string{"the", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"})
 
-	assert.Equal(t, []rune("abdefghijkstywv"), result)
+	assert.Equal(t, "thequickbrownfxjmpsvlazydg", string(result))
 }

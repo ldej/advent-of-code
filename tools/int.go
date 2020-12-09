@@ -120,6 +120,11 @@ func IntsProduct(ints []int) int {
 	return result
 }
 
+// IntsProductVar is the variadic version of IntsSum
+func IntsProductVar(ints ...int) int {
+	return IntsProduct(ints)
+}
+
 // IntsSum adds up all the ints a slice
 func IntsSum(ints []int) int {
 	result := 0
@@ -127,6 +132,21 @@ func IntsSum(ints []int) int {
 		result += i
 	}
 	return result
+}
+
+// IntsSumVar is the variadic version of IntsSum
+func IntsSumVar(ints ...int) int {
+	return IntsSum(ints)
+}
+
+// IntsNonN first the first integer that is not n or -1
+func IntsNonN(ints []int, n int) int {
+	for _, v := range ints {
+		if v != n {
+			return v
+		}
+	}
+	return -1
 }
 
 // IntSlicesEqual checks if two integer slices are equal
@@ -190,10 +210,10 @@ func IntLength(value int) int {
 	return len(fmt.Sprintf("%d", value))
 }
 
-// IntIndex the digit on index n of an integer
+// IntDigitIndex the digit on index n of an integer
 //
-// example: IntIndex(12345, 1) == 2
-func IntIndex(value int, index int) int {
+// example: IntDigitIndex(12345, 1) == 2
+func IntDigitIndex(value int, index int) int {
 	return IntToSlice(value)[index]
 }
 
@@ -224,4 +244,21 @@ func GreatestCommonDivisorSlice(numbers []int) int {
 		gcd = GreatestCommonDivisor(gcd, number)
 	}
 	return gcd
+}
+
+func MapInts(ints []int, f func(index, value int) int) []int {
+	var newInts = make([]int, len(ints), len(ints))
+	for i, v := range ints {
+		newInts[i] = f(i, v)
+	}
+	return newInts
+}
+
+func IntSliceIndexOf(ints []int, value int) int {
+	for index, v := range ints {
+		if v == value {
+			return index
+		}
+	}
+	return -1
 }
