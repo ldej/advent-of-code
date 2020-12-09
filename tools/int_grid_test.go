@@ -158,7 +158,7 @@ func TestIntGrid_Windows(t *testing.T) {
 		[]int{1, 2, 3, 4, 5, 6, 7},
 		[]int{1, 2, 3, 4, 5, 6, 7},
 		[]int{1, 2, 3, 4, 9, 6, 7},
-		[]int{1, 2, 3, 4, 5, 6, 7},
+		[]int{1, 2, 3, 4, 5, 6, 10},
 	}
 
 	var windows []IntGrid
@@ -174,6 +174,9 @@ func TestIntGrid_Windows(t *testing.T) {
 		windows = append(windows, window)
 	}
 	assert.Len(t, windows, 36)
+
+	lastCellLastWindow := windows[len(windows)-1][len(windows[0])-1][len(windows[0][0])-1]
+	assert.Equal(t, lastCellLastWindow, 10)
 }
 
 func TestIntGrid_WindowSum(t *testing.T) {

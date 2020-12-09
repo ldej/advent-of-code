@@ -25,7 +25,7 @@ func run(input string, expected int) int {
 		return -1
 	})
 
-	return tools.IntSliceNonN(result, 0)
+	return tools.IntsNonN(result, 0)
 }
 
 func containsSum(ints []int, expected int) ([]int, bool) {

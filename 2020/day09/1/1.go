@@ -31,5 +31,5 @@ func run(input string, lookBack int) int {
 		return -1
 	})
 
-	return ints[tools.IntSliceIndexOf(results, -1)]
+	return ints[tools.IntsIndexOf(results, -1)]
 }

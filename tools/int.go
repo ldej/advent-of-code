@@ -138,8 +138,8 @@ func IntSlicesEqual(a []int, b []int) bool {
 	return true
 }
 
-// IntSliceContains checks if an integer is part of a slice
-func IntSliceContains(a []int, b int) bool {
+// IntsContain checks if an integer is part of a slice
+func IntsContain(a []int, b int) bool {
 	for _, i := range a {
 		if i == b {
 			return true
@@ -232,8 +232,8 @@ func MapInts(ints []int, f func(index, value int) int) []int {
 	return newInts
 }
 
-// IntSliceIndexOf returns the index of the first element that matches the value
-func IntSliceIndexOf(ints []int, value int) int {
+// IntsIndexOf returns the index of the first element that matches the value
+func IntsIndexOf(ints []int, value int) int {
 	for index, v := range ints {
 		if v == value {
 			return index
@@ -242,12 +242,23 @@ func IntSliceIndexOf(ints []int, value int) int {
 	return -1
 }
 
-// IntSliceNonN returns the first integer that is not n, otherwise -1
-func IntSliceNonN(ints []int, n int) int {
+// IntsNonN returns the first integer that is not n, otherwise -1
+func IntsNonN(ints []int, n int) int {
 	for _, v := range ints {
 		if v != n {
 			return v
 		}
 	}
 	return -1
+}
+
+// IntsFilter returns a slice with all ints with value n removed
+func IntsFilter(ints []int, n int) []int {
+	var result []int
+	for _, i := range ints {
+		if i != n {
+			result = append(result, n)
+		}
+	}
+	return result
 }

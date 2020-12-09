@@ -44,7 +44,7 @@ func run() int {
 	for rowNumber, seatNumbers := range rowMap {
 		if len(seatNumbers) != 8 && rowNumber > firstRow && rowNumber < lastRow {
 			for i := 0; i < 8; i++ {
-				if !tools.IntSliceContains(seatNumbers, i) {
+				if !tools.IntsContain(seatNumbers, i) {
 					mySeat = rowNumber*8 + i
 				}
 			}

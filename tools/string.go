@@ -130,3 +130,23 @@ func StringsUnion(strs []string) []rune {
 	}
 	return result
 }
+
+func StringsFilter(strs []string, filter string) []string {
+	var result []string
+	for _, s := range strs {
+		if s != filter {
+			result = append(result, s)
+		}
+	}
+	return result
+}
+
+// MapStrings applies a function to every string in a slice
+// a new slice is returned
+func MapStrings(strs []string, f func(index int, value string) string) []string {
+	var result = make([]string, len(strs), len(strs))
+	for i, v := range strs {
+		result[i] = f(i, v)
+	}
+	return result
+}
