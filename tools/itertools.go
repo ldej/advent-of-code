@@ -88,7 +88,6 @@ func CombinationsInt(iterable []int, length int) chan []int {
 // CombinationsStr generates all the combinations of r elements
 // extracted from an slice of strings
 func CombinationsStr(iterable []string, length int) chan []string {
-
 	ch := make(chan []string)
 
 	go func() {
@@ -101,6 +100,29 @@ func CombinationsStr(iterable []string, length int) chan []string {
 			ch <- result
 		}
 
+		close(ch)
+	}()
+	return ch
+}
+
+// GenMapInts is the generator version of MapInts which can partially apply a function if you break early
+func GenMapInts(ints []int, f func(index, value int) int) chan []int {
+	ch := make(chan []int)
+
+	length := len(ints)
+
+	newInts := make([]int, length)
+	copy(newInts, ints)
+
+	go func() {
+		for i, v := range ints {
+			newInts[i] = f(i, v)
+
+			// copy to prevent override
+			temp := make([]int, length)
+			copy(temp, newInts)
+			ch <- temp
+		}
 		close(ch)
 	}()
 	return ch

@@ -27,3 +27,16 @@ func TestCombinationsInt(t *testing.T) {
 	}
 	assert.Equal(t, expected, result)
 }
+
+func TestGenMapInts(t *testing.T) {
+	input := []int{1, 2, 3, 4, 5}
+
+	var result []int
+	for result = range GenMapInts(input, func(i, v int) int { return v * v }) {
+		if IntsIndexOf(result, 9) >= 0 {
+			break
+		}
+	}
+
+	assert.Equal(t, []int{1, 4, 9, 4, 5}, result)
+}
