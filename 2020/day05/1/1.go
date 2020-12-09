@@ -22,7 +22,7 @@ func run() int {
 		seats = append(seats, Seat(line, nrows, ncols))
 	}
 
-	return tools.MaxList(seats)
+	return tools.MaxSlice(seats)
 }
 
 func Seat(line string, nrows int, ncols int) int {

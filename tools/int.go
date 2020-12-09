@@ -7,14 +7,11 @@ import (
 	"strconv"
 )
 
-func Max(x, y int) int {
-	if x < y {
-		return y
-	}
-	return x
+func Max(ints ...int) int {
+	return MaxSlice(ints)
 }
 
-func MaxList(ints []int) int {
+func MaxSlice(ints []int) int {
 	max := ints[0]
 	for _, i := range ints {
 		if i > max {
@@ -24,7 +21,7 @@ func MaxList(ints []int) int {
 	return max
 }
 
-func MaxListIndex(ints []int) int {
+func MaxSliceIndex(ints []int) int {
 	max := ints[0]
 	index := 0
 	for i, value := range ints {
@@ -36,15 +33,8 @@ func MaxListIndex(ints []int) int {
 	return index
 }
 
-func MaxVar(ints ...int) int {
-	return MaxList(ints)
-}
-
-func Min(x, y int) int {
-	if x > y {
-		return y
-	}
-	return x
+func Min(ints ...int) int {
+	return MinList(ints)
 }
 
 func MinList(ints []int) int {
@@ -67,10 +57,6 @@ func MinListIndex(ints []int) int {
 		}
 	}
 	return index
-}
-
-func MinVar(ints ...int) int {
-	return MinList(ints)
 }
 
 func MinAndMax(ints []int) (int, int) {
@@ -137,16 +123,6 @@ func IntsSum(ints []int) int {
 // IntsSumVar is the variadic version of IntsSum
 func IntsSumVar(ints ...int) int {
 	return IntsSum(ints)
-}
-
-// IntsNonN first the first integer that is not n or -1
-func IntsNonN(ints []int, n int) int {
-	for _, v := range ints {
-		if v != n {
-			return v
-		}
-	}
-	return -1
 }
 
 // IntSlicesEqual checks if two integer slices are equal
@@ -246,6 +222,8 @@ func GreatestCommonDivisorSlice(numbers []int) int {
 	return gcd
 }
 
+// MapInts applies a function to every integer in a slice
+// a new slice is returned
 func MapInts(ints []int, f func(index, value int) int) []int {
 	var newInts = make([]int, len(ints), len(ints))
 	for i, v := range ints {
@@ -254,10 +232,21 @@ func MapInts(ints []int, f func(index, value int) int) []int {
 	return newInts
 }
 
+// IntSliceIndexOf returns the index of the first element that matches the value
 func IntSliceIndexOf(ints []int, value int) int {
 	for index, v := range ints {
 		if v == value {
 			return index
+		}
+	}
+	return -1
+}
+
+// IntSliceNonN returns the first integer that is not n, otherwise -1
+func IntSliceNonN(ints []int, n int) int {
+	for _, v := range ints {
+		if v != n {
+			return v
 		}
 	}
 	return -1

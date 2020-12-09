@@ -24,7 +24,7 @@ func run(input string, lookBack int) int {
 			return 1
 		}
 		for combination := range tools.CombinationsInt(ints[i-lookBack:i], 2) {
-			if tools.IntsSum(combination...) == v {
+			if tools.IntsSum(combination) == v {
 				return 1
 			}
 		}
