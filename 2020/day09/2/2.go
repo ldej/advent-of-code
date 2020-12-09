@@ -19,25 +19,24 @@ func run(input string, expected int) int {
 	ints := tools.ReadInts(input)
 
 	result := tools.MapInts(ints, func(i, v int) int {
-		if res, contains := containsSum(ints[i:], expected); contains {
+		if res := findSumSlice(ints[i:], expected); res != nil {
 			return tools.IntsSumVar(tools.MinAndMax(res))
 		}
-		return -1
+		return 0
 	})
 
 	return tools.IntsNonN(result, 0)
 }
 
-func containsSum(ints []int, expected int) ([]int, bool) {
-	sum := 0
-
-	for j := 0; sum <= expected; j++ {
-		sum = tools.IntsSum(ints[:j])
+func findSumSlice(ints []int, expected int) []int {
+	for j := 0; j < len(ints); j++ {
+		sum := tools.IntsSum(ints[:j])
 
 		if sum == expected {
-			return ints[:j], true
+			return ints[:j]
+		} else if sum > expected {
+			return nil
 		}
 	}
-
-	return nil, false
+	return nil
 }

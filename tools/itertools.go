@@ -1,6 +1,6 @@
 package tools
 
-// https://github.com/ernestosuarez/itertools
+// https://github.com/ernestosuarez/itertools combinations permutations
 
 // GenIndexes generates, from two natural numbers n > r,
 // all the possible combinations of r indexes taken from 0 to n-1.
