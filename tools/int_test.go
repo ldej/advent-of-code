@@ -83,3 +83,11 @@ func TestMapInts(t *testing.T) {
 
 	assert.Equal(t, []int{1, 4, 9, 16}, result)
 }
+
+func TestIntsWithout(t *testing.T) {
+	input := []int{1, 2, 3, 4, 5}
+	assert.Equal(t, []int{2, 3, 4, 5}, IntsRemoveIndex(input, 0))
+	assert.Equal(t, []int{1, 2, 3, 4, 5}, input)
+	assert.Equal(t, []int{1, 2, 3, 4}, IntsRemoveIndex([]int{1, 2, 3, 4, 5}, 4))
+	assert.Equal(t, []int{1, 2, 3, 4, 5}, input)
+}

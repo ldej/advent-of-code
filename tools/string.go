@@ -150,3 +150,19 @@ func MapStrings(strs []string, f func(index int, value string) string) []string 
 	}
 	return result
 }
+
+// StringsRemoveIndex removes the item at index while preserving the original slice
+func StringsRemoveIndex(strs []string, index int) []string {
+	tmp := make([]string, 0)
+	tmp = append(tmp, strs[:index]...)
+	return append(tmp, strs[index+1:]...)
+}
+
+func StringsAppendPreserve(strs []string, item string) []string {
+	tmp := make([]string, 0)
+	return append(append(tmp, strs...), item)
+}
+
+func StringsPrepend(strs []string, item string) []string {
+	return append([]string{item}, strs...)
+}

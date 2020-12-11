@@ -262,3 +262,19 @@ func IntsFilter(ints []int, n int) []int {
 	}
 	return result
 }
+
+// IntsRemoveIndex removes the item at index while preserving the original slice
+func IntsRemoveIndex(ints []int, index int) []int {
+	tmp := make([]int, 0)
+	tmp = append(tmp, ints[:index]...)
+	return append(tmp, ints[index+1:]...)
+}
+
+func IntsAppendPreserve(ints []int, item int) []int {
+	tmp := make([]int, 0)
+	return append(append(tmp, ints...), item)
+}
+
+func IntsPrepend(ints []int, item int) []int {
+	return append([]int{item}, ints...)
+}

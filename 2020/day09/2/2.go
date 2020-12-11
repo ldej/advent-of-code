@@ -18,8 +18,11 @@ func main() {
 func run(input string, expected int) int {
 	ints := tools.ReadInts(input)
 
+	r := slidingWindow(ints, expected)
+	fmt.Println(r)
+
 	result := tools.MapInts(ints, func(i, v int) int {
-		if res := findSumSlice(ints[i:], expected); res != nil {
+		if res := findSliceSum(ints[i:], expected); res != nil {
 			return tools.IntsSumVar(tools.MinAndMax(res))
 		}
 		return 0
@@ -28,7 +31,7 @@ func run(input string, expected int) int {
 	return tools.IntsNonN(result, 0)
 }
 
-func findSumSlice(ints []int, expected int) []int {
+func findSliceSum(ints []int, expected int) []int {
 	for j := 0; j < len(ints); j++ {
 		sum := tools.IntsSum(ints[:j])
 
@@ -39,4 +42,21 @@ func findSumSlice(ints []int, expected int) []int {
 		}
 	}
 	return nil
+}
+
+func slidingWindow(ints []int, expected int) int {
+	s, e := 0, 1
+	sum := ints[s] + ints[e]
+
+	for {
+		if sum == expected {
+			return tools.IntsSumVar(tools.MinAndMax(ints[s:e]))
+		} else if sum < expected {
+			e += 1
+			sum += ints[e]
+		} else if sum > expected {
+			sum -= ints[s]
+			s += 1
+		}
+	}
 }
