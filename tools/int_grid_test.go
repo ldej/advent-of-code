@@ -142,9 +142,13 @@ func TestIntGrid_Window(t *testing.T) {
 
 	window := grid.Window(2, 3, 1, 2)
 
-	expected := IntGrid{
-		{1, 1, 1},
-		{1, 1, 1},
+	expected := IntWindow{
+		Grid: IntGrid{
+			{1, 1, 1},
+			{1, 1, 1},
+		},
+		CenterX: 0,
+		CenterY: 0,
 	}
 
 	assert.Equal(t, expected, window)
@@ -161,21 +165,21 @@ func TestIntGrid_Windows(t *testing.T) {
 		[]int{1, 2, 3, 4, 5, 6, 10},
 	}
 
-	var windows []IntGrid
+	var windows []IntWindow
 
-	for window := range grid.Windows(1, 1) {
+	for window := range grid.Windows(1, 2) {
 		windows = append(windows, window)
 	}
-	assert.Len(t, windows, 49)
+	assert.Len(t, windows, 42)
 
-	windows = []IntGrid{}
+	windows = []IntWindow{}
 
 	for window := range grid.Windows(2, 2) {
 		windows = append(windows, window)
 	}
 	assert.Len(t, windows, 36)
 
-	lastCellLastWindow := windows[len(windows)-1][len(windows[0])-1][len(windows[0][0])-1]
+	lastCellLastWindow := windows[len(windows)-1].Grid[len(windows[0].Grid)-1][len(windows[0].Grid[0])-1]
 	assert.Equal(t, lastCellLastWindow, 10)
 }
 
@@ -208,15 +212,16 @@ func TestIntGrid_MaxWindowSum(t *testing.T) {
 		y   int
 		sum int
 	}{
-		{1, 1, 3, 3, 200},
 		{2, 2, 2, 2, 220},
-		{3, 3, 1, 1, 230},
 		{4, 4, 3, 3, 390},
-		{5, 5, 2, 2, 412},
 		{6, 6, 1, 1, 422},
-		{7, 7, 0, 0, 492},
 		{2, 5, 2, 1, 226},
 		{6, 2, 1, 2, 221},
+
+		// odd squares have their origin in the center
+		{3, 3, 2, 2, 230},
+		{5, 5, 4, 4, 412},
+		{7, 7, 3, 3, 492},
 	}
 
 	grid := IntGrid{

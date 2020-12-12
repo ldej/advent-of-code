@@ -278,3 +278,7 @@ func IntsAppendPreserve(ints []int, item int) []int {
 func IntsPrepend(ints []int, item int) []int {
 	return append([]int{item}, ints...)
 }
+
+func IntsOutOfBounds(ints []int, index int) bool {
+	return index < 0 || index >= len(ints)
+}

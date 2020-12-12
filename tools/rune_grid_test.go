@@ -128,3 +128,17 @@ func BenchmarkRuneGrid_PGrow(b *testing.B) {
 		grid.PGrow('*')
 	}
 }
+
+func TestRuneGrid_Count(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("#######"),
+		[]rune("#.G...#"),
+		[]rune("#...EG#"),
+		[]rune("#.#.#G#"),
+		[]rune("#..G#E#"),
+		[]rune("#...X.#"),
+		[]rune("#######"),
+	}
+
+	assert.Equal(t, 27, grid.Count('#'))
+}
