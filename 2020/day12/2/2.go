@@ -32,34 +32,32 @@ func run(input string) int {
 		case 'F':
 			positionX += waypointX * number
 			positionY += waypointY * number
-		case 'N':
-			waypointY -= number
-		case 'S':
-			waypointY += number
 		case 'E':
 			waypointX += number
+		case 'S':
+			waypointY += number
 		case 'W':
 			waypointX -= number
+		case 'N':
+			waypointY -= number
 		case 'L':
-			switch number {
-			case 90:
-				waypointX, waypointY = waypointY, -waypointX
-			case 180:
-				waypointX, waypointY = -waypointX, -waypointY
-			case 270:
-				waypointX, waypointY = -waypointY, waypointX
-			}
+			waypointX, waypointY = turn(waypointX, waypointY, -1, number)
 		case 'R':
-			switch number {
-			case 90:
-				waypointX, waypointY = -waypointY, waypointX
-			case 180:
-				waypointX, waypointY = -waypointX, -waypointY
-			case 270:
-				waypointX, waypointY = waypointY, -waypointX
-			}
+			waypointX, waypointY = turn(waypointX, waypointY, 1, number)
 		}
 	}
 
 	return tools.ManhattanDistance(0, 0, positionX, positionY)
+}
+
+func turn(x int, y int, direction int, degrees int) (int, int) {
+	switch degrees {
+	case 90:
+		x, y = -y*direction, x*direction
+	case 180:
+		x, y = -x, -y
+	case 270:
+		x, y = y*direction, -x*direction
+	}
+	return x, y
 }

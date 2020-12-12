@@ -41,27 +41,27 @@ func run(input string) int {
 				positionX += number
 			case South:
 				positionY += number
-			case North:
-				positionY -= number
 			case West:
 				positionX -= number
+			case North:
+				positionY -= number
 			}
-		case 'N':
-			positionY -= number
-		case 'S':
-			positionY += number
 		case 'E':
 			positionX += number
+		case 'S':
+			positionY += number
 		case 'W':
 			positionX -= number
+		case 'N':
+			positionY -= number
 		case 'L':
 			direction -= number
 			if direction < 0 {
-				direction = direction + 360
+				direction += 360
 			}
 		case 'R':
 			direction += number
-			direction = direction % 360
+			direction %= 360
 		}
 	}
 
