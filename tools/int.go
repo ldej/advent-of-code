@@ -207,10 +207,17 @@ func IntToSlice(value int) []int {
 }
 
 func GreatestCommonDivisor(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
+	// Euclidean
+	if a < b {
+		a, b = b, a
 	}
-	return a
+	quotient := a / b
+	remainder := a - (quotient * b)
+	if remainder == 0 {
+		return b
+	}
+
+	return GreatestCommonDivisor(b, remainder)
 }
 
 func GreatestCommonDivisorSlice(numbers []int) int {
