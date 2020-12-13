@@ -1,10 +1,8 @@
 package tools
 
 import (
-	"bufio"
 	"io/ioutil"
 	"log"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -16,16 +14,6 @@ func ReadBytes(location string) []byte {
 		log.Fatal(err)
 	}
 	return bytes
-}
-
-func ReadLines(location string) *bufio.Scanner {
-	file, err := os.Open(location)
-	if err != nil {
-		log.Fatal(err)
-	}
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-	return scanner
 }
 
 func ReadRegex(location string, regex string) []map[string]string {
