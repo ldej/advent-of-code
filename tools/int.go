@@ -157,6 +157,14 @@ func ToInt(a string) int {
 	return v
 }
 
+func ToIntOr(a string, or int) int {
+	v, err := strconv.Atoi(a)
+	if err != nil {
+		return or
+	}
+	return v
+}
+
 // InRange from min to max including min and max
 func InRange(value int, min int, max int) bool {
 	if min >= max {

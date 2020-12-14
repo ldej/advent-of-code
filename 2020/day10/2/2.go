@@ -34,6 +34,8 @@ func run(input string) int {
 	return result
 }
 
+// Climbing stairwell problem
+
 func calculate(possibleValues map[int][]int, result map[int]int, target int, index int) int {
 	if value, found := result[index]; found {
 		return value

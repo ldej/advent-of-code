@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -30,13 +29,10 @@ func run(input string) int {
 	times := make([]int, 0)
 
 	for _, in := range inputs {
-		a, err := strconv.Atoi(in)
-		if err == nil {
-			times = append(times, a)
-		} else {
-			times = append(times, -1)
-		}
+		times = append(times, tools.ToIntOr(in, -1))
 	}
+
+	// Chinese remainder theorem
 
 	earliest := times[0]
 	departure := times[0]

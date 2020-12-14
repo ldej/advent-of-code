@@ -69,7 +69,7 @@ func CountOccupied(grid tools.RuneGrid, x, y int) int {
 
 	for i := -1; i <= 1; i++ {
 		for j := -1; j <= 1; j++ {
-			if find(grid, x, y, i, j) {
+			if findOccupied(grid, x, y, i, j) {
 				count++
 			}
 		}
@@ -78,7 +78,7 @@ func CountOccupied(grid tools.RuneGrid, x, y int) int {
 	return count
 }
 
-func find(grid tools.RuneGrid, x, y, xdir, ydir int) bool {
+func findOccupied(grid tools.RuneGrid, x, y, xdir, ydir int) bool {
 	if xdir == 0 && ydir == 0 {
 		return false
 	}
