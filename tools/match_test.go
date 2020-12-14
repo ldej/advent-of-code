@@ -39,3 +39,15 @@ func TestRegexNamedGroups(t *testing.T) {
 	}
 	assert.Equal(t, expected, result)
 }
+
+func TestFindInt(t *testing.T) {
+	assert.Equal(t, 8, FindInt("mem[8]"))
+
+	assert.Equal(t, 10, FindInt("I like 10 over 12"))
+
+	assert.Equal(t, -10, FindInt("it's about -10 degrees"))
+}
+
+func TestFindInts(t *testing.T) {
+	assert.Equal(t, []int{-10, 10}, FindInts("between -10 and 10"))
+}

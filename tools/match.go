@@ -7,10 +7,12 @@ import (
 
 const (
 	ReHexColor = `^#[a-f0-9]{6}$`
+	ReInt      = `-?\d+`
 )
 
 var (
 	CompiledHexColorRegex = regexp.MustCompile(ReHexColor)
+	CompiledIntRegex      = regexp.MustCompile(ReInt)
 )
 
 func IsHexColor(a string) bool {
@@ -55,4 +57,18 @@ func RegexNamedGroups(a string, regex string) map[string]string {
 	}
 
 	return resultsMap
+}
+
+// FindInt returns the first integer in the input
+func FindInt(input string) int {
+	return ToInt(CompiledIntRegex.FindString(input))
+}
+
+func FindInts(input string) []int {
+	matches := CompiledIntRegex.FindAllString(input, -1)
+	var ints []int
+	for _, i := range matches {
+		ints = append(ints, ToInt(i))
+	}
+	return ints
 }
