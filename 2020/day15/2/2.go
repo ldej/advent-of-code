@@ -28,14 +28,16 @@ func run(input string, limit int) int {
 	var spokenCount = map[int]int{}
 	var lastNumber int
 
+	bar := pb.StartNew(limit)
+	bar.SetRefreshRate(time.Second)
+
 	for i, value := range values {
+		bar.Increment()
+
 		spokenCount[value] = 1
 		lastSpoken[value] = i + 1
 		lastNumber = value
 	}
-
-	bar := pb.StartNew(limit)
-	bar.SetRefreshRate(time.Second)
 
 	for i := len(values) + 1; i <= limit; i++ {
 		bar.Increment()
