@@ -157,6 +157,14 @@ func ToInt(a string) int {
 	return v
 }
 
+func ToInts(strs []string) []int {
+	var values []int
+	for _, i := range strs {
+		values = append(values, ToInt(i))
+	}
+	return values
+}
+
 func ToIntOr(a string, or int) int {
 	v, err := strconv.Atoi(a)
 	if err != nil {

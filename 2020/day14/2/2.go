@@ -20,8 +20,7 @@ func main() {
 func run(input string) int {
 	lines := tools.ReadStrings(input)
 
-	memory := map[int]int{}
-
+	var memory = make(map[int]int)
 	var mask string
 
 	for _, line := range lines {
@@ -41,12 +40,7 @@ func run(input string) int {
 		}
 	}
 
-	sum := 0
-	for _, value := range memory {
-		sum += value
-	}
-
-	return sum
+	return tools.MapSumValues(memory)
 }
 
 func getAddresses(memoryAddress int, memoryMask string) []int {
