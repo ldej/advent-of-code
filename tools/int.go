@@ -5,6 +5,7 @@ import (
 	"log"
 	"math"
 	"strconv"
+	"strings"
 )
 
 func Max(ints ...int) int {
@@ -280,7 +281,7 @@ func IntsFilter(ints []int, n int) []int {
 	var result []int
 	for _, i := range ints {
 		if i != n {
-			result = append(result, n)
+			result = append(result, i)
 		}
 	}
 	return result
@@ -304,4 +305,30 @@ func IntsPrepend(ints []int, item int) []int {
 
 func IntsOutOfBounds(ints []int, index int) bool {
 	return index < 0 || index >= len(ints)
+}
+
+func CsvToInts(a string) [][]int {
+	var result [][]int
+
+	lines := strings.Split(a, "\n")
+	for _, line := range lines {
+		var ints []int
+		parts := strings.Split(line, ",")
+		for _, part := range parts {
+			ints = append(ints, ToInt(part))
+		}
+		result = append(result, ints)
+	}
+	return result
+}
+
+func IntsRemoveDuplicates(ints []int) []int {
+	var result []int
+
+	for _, i := range ints {
+		if !IntsContain(result, i) {
+			result = append(result, i)
+		}
+	}
+	return result
 }
