@@ -22,3 +22,21 @@ func MapSumValues(i interface{}) int {
 	}
 	return int(sum)
 }
+
+func MapHasKeys(aMap interface{}, keySlice interface{}) bool {
+	mapKeys := reflect.ValueOf(aMap).MapKeys()
+	keys := reflect.ValueOf(keySlice)
+
+	for i := 0; i < keys.Len(); i++ {
+		var found bool
+		for _, mapKey := range mapKeys {
+			if mapKey.Interface() == keys.Index(i).Interface() {
+				found = true
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
+}
