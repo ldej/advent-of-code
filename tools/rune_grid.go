@@ -242,3 +242,60 @@ func (g *RuneGrid) PGrowRight(char rune) *RuneGrid {
 	}
 	return g
 }
+
+func (g RuneGrid) Transpose() RuneGrid {
+	var newGrid = make(RuneGrid, 0)
+
+	var height = len(g)
+	var width = len(g[0])
+
+	for i := 0; i < width; i++ {
+		var row []rune
+		for j := 0; j < height; j++ {
+			row = append(row, g[j][i])
+		}
+		newGrid = append(newGrid, row)
+	}
+
+	return newGrid
+}
+
+// Rotate in a clockwise direction
+func (g RuneGrid) Rotate(degrees int) RuneGrid {
+	switch degrees {
+	case 90, -270:
+		return g.Transpose().FlipHorizontal()
+	case -90, 270:
+		return g.Transpose().FlipVertical()
+	case 180, -180:
+		return g.FlipHorizontal().FlipVertical()
+	case 360:
+		return g
+	default:
+		log.Fatal("Unsupported degrees")
+		return nil
+	}
+}
+
+func (g RuneGrid) FlipVertical() RuneGrid {
+	var newGrid = make(RuneGrid, 0)
+
+	for i := len(g) - 1; i >= 0; i-- {
+		newGrid = append(newGrid, g[i])
+	}
+
+	return newGrid
+}
+
+func (g RuneGrid) FlipHorizontal() RuneGrid {
+	var newGrid = make(RuneGrid, 0)
+
+	for i := 0; i < len(g); i++ {
+		var row []rune
+		for j := len(g[0]) - 1; j >= 0; j-- {
+			row = append(row, g[i][j])
+		}
+		newGrid = append(newGrid, row)
+	}
+	return newGrid
+}

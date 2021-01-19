@@ -142,3 +142,142 @@ func TestRuneGrid_Count(t *testing.T) {
 
 	assert.Equal(t, 27, grid.Count('#'))
 }
+
+func TestRuneGrid_Transpose(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("1..2"),
+		[]rune("===="),
+		[]rune("||||"),
+		[]rune("----"),
+		[]rune("####"),
+		[]rune("3**4"),
+	}
+
+	expected := RuneGrid{
+		[]rune("1=|-#3"),
+		[]rune(".=|-#*"),
+		[]rune(".=|-#*"),
+		[]rune("2=|-#4"),
+	}
+	assert.Equal(t, expected, grid.Transpose())
+}
+
+func TestRuneGrid_Rotate(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("1..2"),
+		[]rune("===="),
+		[]rune("||||"),
+		[]rune("----"),
+		[]rune("####"),
+		[]rune("3**4"),
+	}
+
+	rotated := grid.Rotate(90)
+	expected := RuneGrid{
+		[]rune("3#-|=1"),
+		[]rune("*#-|=."),
+		[]rune("*#-|=."),
+		[]rune("4#-|=2"),
+	}
+	assert.Equal(t, expected, rotated)
+
+	expected = RuneGrid{
+		[]rune("4**3"),
+		[]rune("####"),
+		[]rune("----"),
+		[]rune("||||"),
+		[]rune("===="),
+		[]rune("2..1"),
+	}
+	rotated = rotated.Rotate(90)
+	assert.Equal(t, expected, rotated)
+
+	expected = RuneGrid{
+		[]rune("3#-|=1"),
+		[]rune("*#-|=."),
+		[]rune("*#-|=."),
+		[]rune("4#-|=2"),
+	}
+	rotated = rotated.Rotate(-90)
+	assert.Equal(t, expected, rotated)
+
+	rotated = grid.Rotate(180)
+	expected = RuneGrid{
+		[]rune("4**3"),
+		[]rune("####"),
+		[]rune("----"),
+		[]rune("||||"),
+		[]rune("===="),
+		[]rune("2..1"),
+	}
+	assert.Equal(t, expected, rotated)
+
+	rotated = grid.Rotate(-180)
+	expected = RuneGrid{
+		[]rune("4**3"),
+		[]rune("####"),
+		[]rune("----"),
+		[]rune("||||"),
+		[]rune("===="),
+		[]rune("2..1"),
+	}
+	assert.Equal(t, expected, rotated)
+
+	rotated = grid.Rotate(-270)
+	expected = RuneGrid{
+		[]rune("3#-|=1"),
+		[]rune("*#-|=."),
+		[]rune("*#-|=."),
+		[]rune("4#-|=2"),
+	}
+	assert.Equal(t, expected, rotated)
+
+	rotated = grid.Rotate(270)
+	expected = RuneGrid{
+		[]rune("2=|-#4"),
+		[]rune(".=|-#*"),
+		[]rune(".=|-#*"),
+		[]rune("1=|-#3"),
+	}
+	assert.Equal(t, expected, rotated)
+}
+
+func TestRuneGrid_FlipVertical(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("1..2"),
+		[]rune("===="),
+		[]rune("||||"),
+		[]rune("----"),
+		[]rune("####"),
+		[]rune("3**4"),
+	}
+
+	expected := RuneGrid{
+		[]rune("3**4"),
+		[]rune("####"),
+		[]rune("----"),
+		[]rune("||||"),
+		[]rune("===="),
+		[]rune("1..2"),
+	}
+
+	assert.Equal(t, expected, grid.FlipVertical())
+}
+
+func TestRuneGrid_FlipHorizontal(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("2=|-#4"),
+		[]rune(".=|-#*"),
+		[]rune(".=|-#*"),
+		[]rune("1=|-#3"),
+	}
+
+	expected := RuneGrid{
+		[]rune("4#-|=2"),
+		[]rune("*#-|=."),
+		[]rune("*#-|=."),
+		[]rune("3#-|=1"),
+	}
+
+	assert.Equal(t, expected, grid.FlipHorizontal())
+}
