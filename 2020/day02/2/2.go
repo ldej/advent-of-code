@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/mystrings"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -21,10 +22,10 @@ func run() int {
 		letter := line["letter"]
 		password := line["password"]
 
-		a := tools.StringIndex(password, min-1)
-		b := tools.StringIndex(password, max-1)
+		a := mystrings.Index(password, min-1)
+		b := mystrings.Index(password, max-1)
 
-		if tools.StringCompareXOR(a, b, letter) {
+		if mystrings.CompareXOR(a, b, letter) {
 			valid += 1
 		}
 	}

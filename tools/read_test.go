@@ -85,19 +85,3 @@ func TestReadString(t *testing.T) {
 
 	assert.Equal(t, "wWuUJjXxqQrqQmKBzZbZzLlkWNqQntxXBZzM", str)
 }
-
-func TestReadRuneGrid(t *testing.T) {
-	grid := ReadRuneGrid("./testdata/rune_grid.txt")
-
-	expected := RuneGrid{
-		[]rune("#######"),
-		[]rune("#.G...#"),
-		[]rune("#...EG#"),
-		[]rune("#.#.#G#"),
-		[]rune("#..G#E#"),
-		[]rune("#.....#"),
-		[]rune("#######"),
-	}
-
-	assert.Equal(t, expected, grid)
-}

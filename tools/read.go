@@ -170,19 +170,3 @@ func ReadStringsDoubleNewlines(location string) []string {
 	}
 	return result
 }
-
-func ReadRuneGrid(location string) RuneGrid {
-	var result RuneGrid
-	content, err := ioutil.ReadFile(location)
-	if err != nil {
-		log.Fatal(err)
-	}
-	lines := strings.Split(string(content), "\n")
-	for _, line := range lines {
-		if len(line) == 0 {
-			continue
-		}
-		result = append(result, []rune(line))
-	}
-	return result
-}

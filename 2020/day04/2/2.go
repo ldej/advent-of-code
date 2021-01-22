@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/mystrings"
 	"strconv"
 	"strings"
 
@@ -78,7 +79,7 @@ func IsValid(key string, value string) bool {
 		return tools.IsHexColor(value)
 	case "ecl":
 		eyeColors := []string{"amb", "blu", "brn", "gry", "grn", "hzl", "oth"}
-		return tools.StringSliceContains(eyeColors, value)
+		return mystrings.SliceContains(eyeColors, value)
 	case "pid":
 		if len(value) != 9 {
 			return false

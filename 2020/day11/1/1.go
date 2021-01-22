@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/runegrid"
 )
 
 func main() {
@@ -23,14 +22,14 @@ const (
 )
 
 func run(input string) int {
-	grid := tools.ReadRuneGrid(input)
+	grid := runegrid.Read(input)
 
 	iterate(grid)
 
 	return grid.Count(occupied)
 }
 
-func iterate(grid tools.RuneGrid) {
+func iterate(grid runegrid.RuneGrid) {
 
 	changed := true
 
@@ -65,7 +64,7 @@ func iterate(grid tools.RuneGrid) {
 	return
 }
 
-func CountOccupied(window tools.RuneWindow) int {
+func CountOccupied(window runegrid.RuneWindow) int {
 	count := 0
 
 	for cell := range window.Grid.Cells() {

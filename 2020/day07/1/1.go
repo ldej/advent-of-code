@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/mystrings"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -28,7 +29,7 @@ func run() int {
 }
 
 func CanHoldShinyGold(bagsMap map[string][]string, bag string) bool {
-	if tools.StringSliceContains(bagsMap[bag], "shiny gold") {
+	if mystrings.SliceContains(bagsMap[bag], "shiny gold") {
 		return true
 	}
 

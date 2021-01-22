@@ -1,14 +1,18 @@
-package tools
+package runegrid
 
 import (
 	"fmt"
 	"log"
+
+	"github.com/ldej/advent-of-code/tools"
 )
 
 type RuneGrid [][]rune
 
 type RuneWindow struct {
 	Grid    RuneGrid
+	X       int
+	Y       int
 	CenterX int
 	CenterY int
 }
@@ -17,6 +21,14 @@ type RuneCell struct {
 	Value rune
 	X     int
 	Y     int
+}
+
+func NewRuneGrid(x, y int) RuneGrid {
+	var newGrid = make(RuneGrid, x)
+	for i := 0; i < x; i++ {
+		newGrid[i] = make([]rune, y)
+	}
+	return newGrid
 }
 
 func (g RuneGrid) Print() {
@@ -88,8 +100,8 @@ func (g RuneGrid) Window(windowHeight int, windowWidth int, x, y int) RuneWindow
 		subtract = (windowWidth - 1) / 2
 	}
 
-	for i := Max(x-subtract, 0); i < Min(x+windowHeight-subtract, len(g)); i++ {
-		min, max := Max(y-subtract, 0), Min(y+windowWidth-subtract, len(g[0]))
+	for i := tools.Max(x-subtract, 0); i < tools.Min(x+windowHeight-subtract, len(g)); i++ {
+		min, max := tools.Max(y-subtract, 0), tools.Min(y+windowWidth-subtract, len(g[0]))
 		window = append(window, g[i][min:max])
 	}
 
@@ -108,6 +120,8 @@ func (g RuneGrid) Window(windowHeight int, windowWidth int, x, y int) RuneWindow
 	}
 	return RuneWindow{
 		Grid:    window,
+		X:       x,
+		Y:       y,
 		CenterX: centerX,
 		CenterY: centerY,
 	}
@@ -125,6 +139,42 @@ func (g RuneGrid) Windows(windowHeight int, windowWidth int) chan RuneWindow {
 		close(ch)
 	}()
 	return ch
+}
+
+func (g RuneGrid) TopEdge() []rune {
+	return g[0]
+}
+
+func (g RuneGrid) RightEdge() []rune {
+	return g.Column(len(g[0]) - 1)
+}
+
+func (g RuneGrid) BottomEdge() []rune {
+	return g[len(g)-1]
+}
+
+func (g RuneGrid) LeftEdge() []rune {
+	return g.Column(0)
+}
+
+func (g RuneGrid) Edges() [][]rune {
+	return [][]rune{g.TopEdge(), g.RightEdge(), g.BottomEdge(), g.LeftEdge()}
+}
+
+func (g RuneGrid) WithoutEdges() RuneGrid {
+	var newGrid RuneGrid
+	for i := 1; i < len(g)-1; i++ {
+		newGrid = append(newGrid, g[i][1:len(g[i])-1])
+	}
+	return newGrid
+}
+
+func (g RuneGrid) Column(index int) []rune {
+	var column []rune
+	for i := 0; i < len(g); i++ {
+		column = append(column, g[i][index])
+	}
+	return column
 }
 
 // GrowAll grows in all directions in one run
@@ -269,12 +319,25 @@ func (g RuneGrid) Rotate(degrees int) RuneGrid {
 		return g.Transpose().FlipVertical()
 	case 180, -180:
 		return g.FlipHorizontal().FlipVertical()
-	case 360:
+	case 0, 360:
 		return g
 	default:
 		log.Fatal("Unsupported degrees")
 		return nil
 	}
+}
+
+func (g RuneGrid) Orientations() []RuneGrid {
+	var rotations = make([]RuneGrid, 8)
+
+	for i := 0; i < 4; i++ {
+		rotations[i] = g.Rotate(90 * i)
+	}
+	var flipped = g.FlipVertical()
+	for i := 0; i < 4; i++ {
+		rotations[4+i] = flipped.Rotate(90 * i)
+	}
+	return rotations
 }
 
 func (g RuneGrid) FlipVertical() RuneGrid {

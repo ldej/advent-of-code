@@ -94,3 +94,11 @@ func (set StringSet) String() string {
 
 	return str[:len(str)-2] + " }"
 }
+
+func (set StringSet) Items() []string {
+	var strings []string
+	for key := range set.items {
+		strings = append(strings, key)
+	}
+	return strings
+}

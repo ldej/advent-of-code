@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/mystrings"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -19,7 +20,7 @@ func run() int {
 
 	for _, line := range lines {
 		people := strings.Split(line, "\n")
-		total += len(tools.StringsIntersection(people))
+		total += len(mystrings.Intersection(people))
 	}
 
 	return total

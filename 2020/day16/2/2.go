@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/mystrings"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -78,7 +79,7 @@ func ReduceRules(rules map[int][]string) map[int]string {
 		matches[index] = rule
 
 		for i, name := range rules {
-			rules[i] = tools.StringsFilter(name, rule)
+			rules[i] = mystrings.Filter(name, rule)
 		}
 	}
 	return matches

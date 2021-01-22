@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/runegrid"
 )
 
 func main() {
@@ -24,7 +23,7 @@ type Cube struct {
 }
 
 func run(input string) int {
-	grid := tools.ReadRuneGrid(input)
+	grid := runegrid.Read(input)
 
 	cubes := map[Cube]bool{}
 

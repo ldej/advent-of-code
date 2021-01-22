@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/runegrid"
 )
 
 func main() {
@@ -12,7 +11,7 @@ func main() {
 }
 
 func run() int {
-	grid := tools.ReadRuneGrid("./2020/day03/input.txt")
+	grid := runegrid.Read("./2020/day03/input.txt")
 
 	row := 0
 	column := 0
