@@ -11,6 +11,7 @@ type data struct {
 	Name string
 }
 
+// Example: go run tools/gen/grid.go -name=Rune -type=rune > 2020/rune_grid.go
 func main() {
 	var d data
 	flag.StringVar(&d.Type, "type", "", "The subtype used for the grid being generated")
@@ -36,7 +37,7 @@ type {{.Name}}Grid [][]{{.Type}}
 func New{{.Name}}Grid(x, y int) {{.Name}}Grid {
 	var newGrid = make({{.Name}}Grid, x)
 	for i := 0; i < x; i++ {
-		newGrid[i] = make({{.Type}}, y)
+		newGrid[i] = make([]{{.Type}}, y)
 	}
 	return newGrid
 }
@@ -72,10 +73,10 @@ func (g {{.Name}}Grid) Set(rowIndex, columnIndex int, value {{.Type}}) {
 	g[rowIndex][columnIndex] = value
 }
 
-func (g {{.Name}}Grid) Count(char {{.Type}}) int {
+func (g {{.Name}}Grid) Count(val {{.Type}}) int {
 	count := 0
 	for cell := range g.Cells() {
-		if cell.Value == char {
+		if cell.Value == val {
 			count += 1
 		}
 	}
@@ -175,23 +176,23 @@ func (g {{.Name}}Grid) Windows(windowHeight int, windowWidth int) chan {{.Name}}
 	return ch
 }
 
-func (g {{.Name}}Grid) TopEdge() {{.Type}} {
+func (g {{.Name}}Grid) TopEdge() []{{.Type}} {
 	return g[0]
 }
 
-func (g {{.Name}}Grid) RightEdge() {{.Type}} {
+func (g {{.Name}}Grid) RightEdge() []{{.Type}} {
 	return g.Column(len(g[0]) - 1)
 }
 
-func (g {{.Name}}Grid) BottomEdge() {{.Type}} {
+func (g {{.Name}}Grid) BottomEdge() []{{.Type}} {
 	return g[len(g)-1]
 }
 
-func (g {{.Name}}Grid) LeftEdge() {{.Type}} {
+func (g {{.Name}}Grid) LeftEdge() []{{.Type}} {
 	return g.Column(0)
 }
 
-func (g {{.Name}}Grid) Edges() []{{.Type}} {
+func (g {{.Name}}Grid) Edges() [][]{{.Type}} {
 	return []{{.Type}}{g.TopEdge(), g.RightEdge(), g.BottomEdge(), g.LeftEdge()}
 }
 
@@ -203,8 +204,8 @@ func (g {{.Name}}Grid) WithoutEdges() {{.Name}}Grid {
 	return newGrid
 }
 
-func (g {{.Name}}Grid) Column(index int) {{.Type}} {
-	var column {{.Type}}
+func (g {{.Name}}Grid) Column(index int) []{{.Type}} {
+	var column []{{.Type}}
 	for i := 0; i < len(g); i++ {
 		column = append(column, g[i][index])
 	}
@@ -338,7 +339,7 @@ func (g {{.Name}}Grid) Transpose() {{.Name}}Grid {
 	var width = len(g[0])
 
 	for i := 0; i < width; i++ {
-		var row {{.Type}}
+		var row []{{.Type}}
 		for j := 0; j < height; j++ {
 			row = append(row, g[j][i])
 		}
@@ -392,7 +393,7 @@ func (g {{.Name}}Grid) FlipHorizontal() {{.Name}}Grid {
 	var newGrid = make({{.Name}}Grid, 0)
 
 	for i := 0; i < len(g); i++ {
-		var row {{.Type}}
+		var row []{{.Type}}
 		for j := len(g[0]) - 1; j >= 0; j-- {
 			row = append(row, g[i][j])
 		}
