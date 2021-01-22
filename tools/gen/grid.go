@@ -33,8 +33,20 @@ import (
 
 type {{.Name}}Grid [][]{{.Type}}
 
+func New{{.Name}}Grid(x, y int) {{.Name}}Grid {
+	var newGrid = make({{.Name}}Grid, x)
+	for i := 0; i < x; i++ {
+		newGrid[i] = make({{.Type}}, y)
+	}
+	return newGrid
+}
+
 type {{.Name}}Window struct {
 	Grid    {{.Name}}Grid
+	X    int
+	Y    int
+	// CenterX and CenterY are the location of the center in the square
+	// in case the window is for an odd sized square
 	CenterX int
 	CenterY int
 }
@@ -101,6 +113,9 @@ func (g {{.Name}}Grid) Cells() chan {{.Name}}Cell {
 	return ch
 }
 
+// Window returns a window of the grid with a certain height and width
+// The x and y are the top left corner of the window
+// In case the window height and width are equal and odd, the x and y are the center of the window
 func (g {{.Name}}Grid) Window(windowHeight int, windowWidth int, x, y int) {{.Name}}Window {
 	if windowHeight == 1 && windowWidth == 1 {
 		log.Fatal("use Cells for 1x1 windows")
@@ -122,18 +137,25 @@ func (g {{.Name}}Grid) Window(windowHeight int, windowWidth int, x, y int) {{.Na
 	var centerX, centerY int
 
 	if oddSquare {
-		// TODO clipped origin and template
 		centerX = (windowHeight - 1) / 2
+		if x-centerX < 0 {
+			centerX = centerX - x
+		}
 		if x == 0 {
 			centerX = 0
 		}
 		centerY = (windowWidth - 1) / 2
+		if y-centerY < 0 {
+			centerY = centerY - y
+		}
 		if y == 0 {
 			centerY = 0
 		}
 	}
 	return {{.Name}}Window{
 		Grid:    window,
+		X:       x,
+		Y:       y,
 		CenterX: centerX,
 		CenterY: centerY,
 	}
@@ -151,6 +173,42 @@ func (g {{.Name}}Grid) Windows(windowHeight int, windowWidth int) chan {{.Name}}
 		close(ch)
 	}()
 	return ch
+}
+
+func (g {{.Name}}Grid) TopEdge() {{.Type}} {
+	return g[0]
+}
+
+func (g {{.Name}}Grid) RightEdge() {{.Type}} {
+	return g.Column(len(g[0]) - 1)
+}
+
+func (g {{.Name}}Grid) BottomEdge() {{.Type}} {
+	return g[len(g)-1]
+}
+
+func (g {{.Name}}Grid) LeftEdge() {{.Type}} {
+	return g.Column(0)
+}
+
+func (g {{.Name}}Grid) Edges() []{{.Type}} {
+	return []{{.Type}}{g.TopEdge(), g.RightEdge(), g.BottomEdge(), g.LeftEdge()}
+}
+
+func (g {{.Name}}Grid) WithoutEdges() {{.Name}}Grid {
+	var newGrid {{.Name}}Grid
+	for i := 1; i < len(g)-1; i++ {
+		newGrid = append(newGrid, g[i][1:len(g[i])-1])
+	}
+	return newGrid
+}
+
+func (g {{.Name}}Grid) Column(index int) {{.Type}} {
+	var column {{.Type}}
+	for i := 0; i < len(g); i++ {
+		column = append(column, g[i][index])
+	}
+	return column
 }
 
 // GrowAll grows in all directions in one run
@@ -271,5 +329,75 @@ func (g *{{.Name}}Grid) PGrowRight(defaultValue {{.Type}}) *{{.Name}}Grid {
 		(*g)[i] = append(row, defaultValue)
 	}
 	return g
+}
+
+func (g {{.Name}}Grid) Transpose() {{.Name}}Grid {
+	var newGrid = make({{.Name}}Grid, 0)
+
+	var height = len(g)
+	var width = len(g[0])
+
+	for i := 0; i < width; i++ {
+		var row {{.Type}}
+		for j := 0; j < height; j++ {
+			row = append(row, g[j][i])
+		}
+		newGrid = append(newGrid, row)
+	}
+
+	return newGrid
+}
+
+// Rotate in a clockwise direction
+func (g {{.Name}}Grid) Rotate(degrees int) {{.Name}}Grid {
+	switch degrees {
+	case 90, -270:
+		return g.Transpose().FlipHorizontal()
+	case -90, 270:
+		return g.Transpose().FlipVertical()
+	case 180, -180:
+		return g.FlipHorizontal().FlipVertical()
+	case 0, 360:
+		return g
+	default:
+		panic("Unsupported degrees")
+	}
+}
+
+// Orientations returns all orientations of the grid, that is all 4 rotations and their mirrored versions
+func (g {{.Name}}Grid) Orientations() []{{.Name}}Grid {
+	var rotations = make([]{{.Name}}Grid, 8)
+
+	for i := 0; i < 4; i++ {
+		rotations[i] = g.Rotate(90 * i)
+	}
+	var flipped = g.FlipVertical()
+	for i := 0; i < 4; i++ {
+		rotations[4+i] = flipped.Rotate(90 * i)
+	}
+	return rotations
+}
+
+func (g {{.Name}}Grid) FlipVertical() {{.Name}}Grid {
+	var newGrid = make({{.Name}}Grid, 0)
+
+	for i := len(g) - 1; i >= 0; i-- {
+		newGrid = append(newGrid, g[i])
+	}
+
+	return newGrid
+}
+
+func (g {{.Name}}Grid) FlipHorizontal() {{.Name}}Grid {
+	var newGrid = make({{.Name}}Grid, 0)
+
+	for i := 0; i < len(g); i++ {
+		var row {{.Type}}
+		for j := len(g[0]) - 1; j >= 0; j-- {
+			row = append(row, g[i][j])
+		}
+		newGrid = append(newGrid, row)
+	}
+	return newGrid
 }
 `

@@ -281,3 +281,126 @@ func TestRuneGrid_FlipHorizontal(t *testing.T) {
 
 	assert.Equal(t, expected, grid.FlipHorizontal())
 }
+
+func TestRuneGrid_Window_3x3_1(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("#######"),
+		[]rune("#.G...#"),
+		[]rune("#...EG#"),
+		[]rune("#.#X#G#"),
+		[]rune("#..G#E#"),
+		[]rune("#.....#"),
+		[]rune("#######"),
+	}
+	expected := RuneWindow{
+		Grid: RuneGrid{
+			[]rune("..E"),
+			[]rune("#X#"),
+			[]rune(".G#"),
+		},
+		X:       3,
+		Y:       3,
+		CenterX: 1,
+		CenterY: 1,
+	}
+	assert.Equal(t, expected, grid.Window(3, 3, 3, 3))
+}
+
+func TestRuneGrid_Window_3x3_2(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("#######"),
+		[]rune("#.G...#"),
+		[]rune("#...EG#"),
+		[]rune("#.#X#G#"),
+		[]rune("#..G#E#"),
+		[]rune("#.....#"),
+		[]rune("#######"),
+	}
+	expected := RuneWindow{
+		Grid: RuneGrid{
+			[]rune("##"),
+			[]rune("#."),
+		},
+		X:       0,
+		Y:       0,
+		CenterX: 0,
+		CenterY: 0,
+	}
+	assert.Equal(t, expected, grid.Window(3, 3, 0, 0))
+}
+
+func TestRuneGrid_Window_5x5_1(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("#######"),
+		[]rune("#.G...#"),
+		[]rune("#...EG#"),
+		[]rune("#.#X#G#"),
+		[]rune("#..G#E#"),
+		[]rune("#.....#"),
+		[]rune("#######"),
+	}
+	expected := RuneWindow{
+		Grid: RuneGrid{
+			[]rune(".G..."),
+			[]rune("...EG"),
+			[]rune(".#X#G"),
+			[]rune("..G#E"),
+			[]rune("....."),
+		},
+		X:       3,
+		Y:       3,
+		CenterX: 2,
+		CenterY: 2,
+	}
+	assert.Equal(t, expected, grid.Window(5, 5, 3, 3))
+}
+
+func TestRuneGrid_Window_5x5_2(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("#######"),
+		[]rune("#.G...#"),
+		[]rune("#...EG#"),
+		[]rune("#.#X#G#"),
+		[]rune("#..G#E#"),
+		[]rune("#.....#"),
+		[]rune("#######"),
+	}
+	expected := RuneWindow{
+		Grid: RuneGrid{
+			[]rune("####"),
+			[]rune("#.G."),
+			[]rune("#..."),
+			[]rune("#.#X"),
+		},
+		X:       1,
+		Y:       1,
+		CenterX: 1,
+		CenterY: 1,
+	}
+	assert.Equal(t, expected, grid.Window(5, 5, 1, 1))
+}
+
+func TestRuneGrid_Window_5x5_3(t *testing.T) {
+	grid := RuneGrid{
+		[]rune("#######"),
+		[]rune("#.G...#"),
+		[]rune("#...EG#"),
+		[]rune("#.#X#G#"),
+		[]rune("#..G#E#"),
+		[]rune("#.....#"),
+		[]rune("#######"),
+	}
+	expected := RuneWindow{
+		Grid: RuneGrid{
+			[]rune("X#G#"),
+			[]rune("G#E#"),
+			[]rune("...#"),
+			[]rune("####"),
+		},
+		X:       5,
+		Y:       5,
+		CenterX: 2,
+		CenterY: 2,
+	}
+	assert.Equal(t, expected, grid.Window(5, 5, 5, 5))
+}

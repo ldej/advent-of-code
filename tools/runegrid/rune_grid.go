@@ -10,9 +10,11 @@ import (
 type RuneGrid [][]rune
 
 type RuneWindow struct {
-	Grid    RuneGrid
-	X       int
-	Y       int
+	Grid RuneGrid
+	X    int
+	Y    int
+	// CenterX and CenterY are the location of the center in the square
+	// in case the window is for an odd sized square
 	CenterX int
 	CenterY int
 }
@@ -87,6 +89,9 @@ func (g RuneGrid) Cells() chan RuneCell {
 	return ch
 }
 
+// Window returns a window of the grid with a certain height and width
+// The x and y are the top left corner of the window
+// In case the window height and width are equal and odd, the x and y are the center of the window
 func (g RuneGrid) Window(windowHeight int, windowWidth int, x, y int) RuneWindow {
 	if windowHeight == 1 && windowWidth == 1 {
 		log.Fatal("use Cells for 1x1 windows")
@@ -108,12 +113,17 @@ func (g RuneGrid) Window(windowHeight int, windowWidth int, x, y int) RuneWindow
 	var centerX, centerY int
 
 	if oddSquare {
-		// TODO clipped origin and template
 		centerX = (windowHeight - 1) / 2
+		if x-centerX < 0 {
+			centerX = centerX - x
+		}
 		if x == 0 {
 			centerX = 0
 		}
 		centerY = (windowWidth - 1) / 2
+		if y-centerY < 0 {
+			centerY = centerY - y
+		}
 		if y == 0 {
 			centerY = 0
 		}
@@ -322,11 +332,11 @@ func (g RuneGrid) Rotate(degrees int) RuneGrid {
 	case 0, 360:
 		return g
 	default:
-		log.Fatal("Unsupported degrees")
-		return nil
+		panic("Unsupported degrees")
 	}
 }
 
+// Orientations returns all orientations of the grid, that is all 4 rotations and their mirrored versions
 func (g RuneGrid) Orientations() []RuneGrid {
 	var rotations = make([]RuneGrid, 8)
 
