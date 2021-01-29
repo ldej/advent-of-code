@@ -21,6 +21,6 @@ func ToBinary(input int) string {
 	return fmt.Sprintf("%b", input)
 }
 
-func ToBinaryPadded(input int, bits int) string {
-	return fmt.Sprintf("%0*b", bits, input)
+func ToBinaryPadded(input int, size int) string {
+	return fmt.Sprintf("%0*b", size, input)
 }

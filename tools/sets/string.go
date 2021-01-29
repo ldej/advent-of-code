@@ -9,29 +9,36 @@ type StringSet struct {
 	items map[string]types.Nil
 }
 
-func NewStringSet() StringSet {
+func NewStringSet(items ...string) *StringSet {
 	set := new(StringSet)
 	set.items = make(map[string]types.Nil)
-	return *set
-}
-
-func (set *StringSet) Add(item string) {
-	if item != "" {
-		set.items[item] = types.Nil{}
+	for _, item := range items {
+		set.Add(item)
 	}
+	return set
 }
 
-func (set *StringSet) Remove(item string) {
+func (set *StringSet) Add(items ...string) *StringSet {
+	for _, item := range items {
+		if item != "" {
+			set.items[item] = types.Nil{}
+		}
+	}
+	return set
+}
+
+func (set *StringSet) Remove(item string) *StringSet {
 	if _, found := set.items[item]; found {
 		delete(set.items, item)
 	}
+	return set
 }
 
 func (set *StringSet) Clear() {
 	set.items = make(map[string]types.Nil)
 }
 
-func (set *StringSet) Copy() StringSet {
+func (set *StringSet) Copy() *StringSet {
 	resultSet := NewStringSet()
 
 	for item := range set.items {
@@ -74,11 +81,11 @@ func (set *StringSet) Min() string {
 	return min
 }
 
-func (set *StringSet) Intersect(setToIntersectWith StringSet) StringSet {
+func (set *StringSet) Intersect(setToIntersectWith *StringSet) *StringSet {
 	resultSet := NewStringSet()
 
 	for item := range set.items {
-		if set.Contains(item) != setToIntersectWith.Contains(item) {
+		if setToIntersectWith.Contains(item) {
 			resultSet.Add(item)
 		}
 	}

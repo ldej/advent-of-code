@@ -55,7 +55,6 @@ func run(input string) int {
 								}
 								matchSet.Add(id2)
 								matches[id1] = matchSet
-								//fmt.Println("Tile 1", id1, "Flipped", flipped1, "Rotation", orientation1, "Tile 2", id2, "Flipped", flipped2, "Rotation", orientation2)
 							}
 						}
 					}
