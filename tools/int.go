@@ -332,3 +332,11 @@ func IntsRemoveDuplicates(ints []int) []int {
 	}
 	return result
 }
+
+func IntsToCSV(ints []int) string {
+	var s []string
+	for _, i := range ints {
+		s = append(s, strconv.Itoa(i))
+	}
+	return strings.Join(s, ", ")
+}
