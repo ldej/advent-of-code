@@ -40,6 +40,12 @@ func PlayGame(player1 queue.IntQueue, player2 queue.IntQueue, game int, lastGame
 	var history1 = make(map[string]bool)
 	var history2 = make(map[string]bool)
 
+	if game > 1 && tools.Max(player1...) > tools.Max(player2...) && tools.Max(player1...) > len(player1)+len(player2)-2 {
+		// https://www.reddit.com/r/adventofcode/comments/khyjgv/2020_day_22_solutions/ggpcsnd/
+		fmt.Println("Sub-game cheat, player 1 wins!")
+		return 0, player1
+	}
+
 	fmt.Printf("=== Game %d ===\n\n", game)
 
 	var round = 1
