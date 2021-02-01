@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"github.com/ldej/advent-of-code/tools/queue"
 	"strings"
 
@@ -40,7 +41,7 @@ func PlayGame(player1 queue.IntQueue, player2 queue.IntQueue, game int, lastGame
 	var history1 = make(map[string]bool)
 	var history2 = make(map[string]bool)
 
-	if game > 1 && tools.Max(player1...) > tools.Max(player2...) && tools.Max(player1...) > len(player1)+len(player2)-2 {
+	if game > 1 && myints.Max(player1...) > myints.Max(player2...) && myints.Max(player1...) > len(player1)+len(player2)-2 {
 		// https://www.reddit.com/r/adventofcode/comments/khyjgv/2020_day_22_solutions/ggpcsnd/
 		fmt.Println("Sub-game cheat, player 1 wins!")
 		return 0, player1
@@ -53,8 +54,8 @@ func PlayGame(player1 queue.IntQueue, player2 queue.IntQueue, game int, lastGame
 
 		fmt.Printf("-- Round %d (Game %d) --\n", round, game)
 
-		cards1 := tools.IntsToCSV(player1)
-		cards2 := tools.IntsToCSV(player2)
+		cards1 := myints.ToCsv(player1)
+		cards2 := myints.ToCsv(player2)
 		fmt.Printf("Player 1's deck: %s\n", cards1)
 		fmt.Printf("Player 2's deck: %s\n", cards2)
 		_, found1 := history1[cards1]

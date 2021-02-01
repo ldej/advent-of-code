@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -28,7 +29,7 @@ func run(input string) int {
 		if instruction[0] == "mask" {
 			mask = instruction[1]
 		} else {
-			mem, value := tools.FindInt(instruction[0]), tools.ToInt(instruction[1])
+			mem, value := tools.FindInt(instruction[0]), myints.ToInt(instruction[1])
 			memory[mem] = applyMask(value, mask)
 		}
 	}

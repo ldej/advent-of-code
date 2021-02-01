@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -22,7 +23,7 @@ func run() int {
 		seats = append(seats, Seat(line, nrows, ncols))
 	}
 
-	return tools.MaxSlice(seats)
+	return myints.MaxSlice(seats)
 }
 
 func Seat(line string, nrows int, ncols int) int {

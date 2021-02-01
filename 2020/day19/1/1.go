@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"regexp"
 	"strings"
 
@@ -26,7 +27,7 @@ func run(input string) int {
 	rulesMap := map[int]string{}
 	for _, ruleLine := range ruleLines {
 		parts := strings.Split(ruleLine, ": ")
-		rulesMap[tools.ToInt(parts[0])] = parts[1]
+		rulesMap[myints.ToInt(parts[0])] = parts[1]
 	}
 
 	regex := createRegex(rulesMap[0], rulesMap, make(map[string]string, 0))
@@ -63,7 +64,7 @@ func createRegex(value string, rules map[int]string, cache map[string]string) st
 		numbers := strings.Split(value, " ")
 		var results []string
 		for _, number := range numbers {
-			results = append(results, createRegex(rules[tools.ToInt(number)], rules, cache))
+			results = append(results, createRegex(rules[myints.ToInt(number)], rules, cache))
 		}
 		result := strings.Join(results, "")
 		cache[value] = result

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -17,8 +18,8 @@ func run() int {
 
 	valid := 0
 	for _, line := range result {
-		min := tools.ToInt(line["min"])
-		max := tools.ToInt(line["max"])
+		min := myints.ToInt(line["min"])
+		max := myints.ToInt(line["max"])
 		letter := line["letter"]
 		password := line["password"]
 

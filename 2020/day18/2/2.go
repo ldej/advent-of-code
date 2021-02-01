@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -37,7 +38,7 @@ func evaluate(input string, lastOp string) (int, string) {
 		result, rest = evaluate(input[1:], "")
 		rest = rest[1:]
 	} else {
-		result, rest = tools.ToInt(input[0:1]), input[1:]
+		result, rest = myints.ToInt(input[0:1]), input[1:]
 	}
 
 	for {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -19,17 +20,17 @@ func main() {
 func run(input string, lookBack int) int {
 	ints := tools.ReadInts(input)
 
-	results := tools.MapInts(ints, func(i, v int) int {
+	results := myints.Map(ints, func(i, v int) int {
 		if i < lookBack {
 			return 1
 		}
 		for combination := range tools.CombinationsInt(ints[i-lookBack:i], 2) {
-			if tools.IntsSum(combination) == v {
+			if myints.Sum(combination) == v {
 				return 1
 			}
 		}
 		return -1
 	})
 
-	return ints[tools.IntsIndexOf(results, -1)]
+	return ints[myints.IndexOf(results, -1)]
 }

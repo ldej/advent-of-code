@@ -2,6 +2,7 @@ package tools
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"log"
 )
 
@@ -125,8 +126,8 @@ func (g IntGrid) Window(windowHeight int, windowWidth int, x, y int) IntWindow {
 		subtract = (windowWidth - 1) / 2
 	}
 
-	for i := Max(x-subtract, 0); i < Min(x+windowHeight-subtract, len(g)); i++ {
-		min, max := Max(y-subtract, 0), Min(y+windowWidth-subtract, len(g[0]))
+	for i := myints.Max(x-subtract, 0); i < myints.Min(x+windowHeight-subtract, len(g)); i++ {
+		min, max := myints.Max(y-subtract, 0), myints.Min(y+windowWidth-subtract, len(g[0]))
 		window = append(window, g[i][min:max])
 	}
 

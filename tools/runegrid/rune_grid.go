@@ -2,9 +2,8 @@ package runegrid
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"log"
-
-	"github.com/ldej/advent-of-code/tools"
 )
 
 type RuneGrid [][]rune
@@ -105,8 +104,8 @@ func (g RuneGrid) Window(windowHeight int, windowWidth int, x, y int) RuneWindow
 		subtract = (windowWidth - 1) / 2
 	}
 
-	for i := tools.Max(x-subtract, 0); i < tools.Min(x+windowHeight-subtract, len(g)); i++ {
-		min, max := tools.Max(y-subtract, 0), tools.Min(y+windowWidth-subtract, len(g[0]))
+	for i := myints.Max(x-subtract, 0); i < myints.Min(x+windowHeight-subtract, len(g)); i++ {
+		min, max := myints.Max(y-subtract, 0), myints.Min(y+windowWidth-subtract, len(g[0]))
 		window = append(window, g[i][min:max])
 	}
 

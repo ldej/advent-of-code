@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -35,7 +36,7 @@ func calculate(a string) (int, string) {
 	if a[0] == '(' {
 		result, rest = calculate(a[1:])
 	} else {
-		result, rest = tools.ToInt(a[0:1]), a[1:]
+		result, rest = myints.ToInt(a[0:1]), a[1:]
 	}
 
 	for {
@@ -54,7 +55,7 @@ func calculate(a string) (int, string) {
 		if next == "(" {
 			right, rest = calculate(rest)
 		} else {
-			right = tools.ToInt(next)
+			right = myints.ToInt(next)
 		}
 
 		if op == "+" {

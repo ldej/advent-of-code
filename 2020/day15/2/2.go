@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 	"time"
 
 	"github.com/cheggaaa/pb/v3"
-
-	"github.com/ldej/advent-of-code/tools"
 )
 
 func main() {
@@ -21,7 +20,7 @@ func main() {
 }
 
 func run(input string, limit int) int {
-	values := tools.ToInts(strings.Split(input, ","))
+	values := myints.ToInts(strings.Split(input, ","))
 
 	var lastSpoken = map[int]int{}
 	var lastSpokenBefore = map[int]int{}

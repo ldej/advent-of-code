@@ -1,4 +1,4 @@
-package tools
+package myints
 
 import (
 	"fmt"
@@ -98,8 +98,8 @@ func ManhattanDistance(x1, y1, x2, y2 int) int {
 	return x + y
 }
 
-// IntsProduct multiplies all the ints in a slice
-func IntsProduct(ints []int) int {
+// Product multiplies all the ints in a slice
+func Product(ints []int) int {
 	result := 1
 	for _, i := range ints {
 		result *= i
@@ -107,13 +107,13 @@ func IntsProduct(ints []int) int {
 	return result
 }
 
-// IntsProductVar is the variadic version of IntsSum
-func IntsProductVar(ints ...int) int {
-	return IntsProduct(ints)
+// ProductVar is the variadic version of Sum
+func ProductVar(ints ...int) int {
+	return Product(ints)
 }
 
-// IntsSum adds up all the ints a slice
-func IntsSum(ints []int) int {
+// Sum adds up all the ints a slice
+func Sum(ints []int) int {
 	result := 0
 	for _, i := range ints {
 		result += i
@@ -121,13 +121,13 @@ func IntsSum(ints []int) int {
 	return result
 }
 
-// IntsSumVar is the variadic version of IntsSum
-func IntsSumVar(ints ...int) int {
-	return IntsSum(ints)
+// IntsSum is the variadic version of Sum
+func IntsSum(ints ...int) int {
+	return Sum(ints)
 }
 
-// IntSlicesEqual checks if two integer slices are equal
-func IntSlicesEqual(a []int, b []int) bool {
+// SlicesEqual checks if two integer slices are equal
+func SlicesEqual(a []int, b []int) bool {
 	if len(a) != len(b) {
 		return false
 	}
@@ -139,8 +139,8 @@ func IntSlicesEqual(a []int, b []int) bool {
 	return true
 }
 
-// IntsContain checks if an integer is part of a slice
-func IntsContain(a []int, b int) bool {
+// SliceContains checks if an integer is part of a slice
+func SliceContains(a []int, b int) bool {
 	for _, i := range a {
 		if i == b {
 			return true
@@ -196,24 +196,24 @@ func OutRange(value int, min int, max int) bool {
 	return true
 }
 
-// IntLength length of and integer
+// Length length of and integer
 //
-// example: IntLength(12345) == 5
-func IntLength(value int) int {
+// example: Length(12345) == 5
+func Length(value int) int {
 	return len(fmt.Sprintf("%d", value))
 }
 
-// IntDigitIndex the digit on index n of an integer
+// Index the digit on index n of an integer
 //
-// example: IntDigitIndex(12345, 1) == 2
-func IntDigitIndex(value int, index int) int {
-	return IntToSlice(value)[index]
+// example: Index(12345, 1) == 2
+func Index(value int, index int) int {
+	return ToDigits(value)[index]
 }
 
-// IntToSlice convert an int to its separate digits
+// ToDigits convert an int to its separate digits
 //
-// example: IntToSlice(12345) == []int{1, 2, 3, 4, 5}
-func IntToSlice(value int) []int {
+// example: ToDigits(12345) == []int{1, 2, 3, 4, 5}
+func ToDigits(value int) []int {
 	str := strconv.Itoa(value)
 	var ints []int
 	for _, i := range str {
@@ -246,9 +246,9 @@ func GreatestCommonDivisorSlice(numbers []int) int {
 	return gcd
 }
 
-// MapInts applies a function to every integer in a slice
+// Map applies a function to every integer in a slice
 // a new slice is returned
-func MapInts(ints []int, f func(index, value int) int) []int {
+func Map(ints []int, f func(index, value int) int) []int {
 	var newInts = make([]int, len(ints), len(ints))
 	for i, v := range ints {
 		newInts[i] = f(i, v)
@@ -256,8 +256,8 @@ func MapInts(ints []int, f func(index, value int) int) []int {
 	return newInts
 }
 
-// IntsIndexOf returns the index of the first element that matches the value
-func IntsIndexOf(ints []int, value int) int {
+// IndexOf returns the index of the first element that matches the value
+func IndexOf(ints []int, value int) int {
 	for index, v := range ints {
 		if v == value {
 			return index
@@ -276,8 +276,8 @@ func IntsNonN(ints []int, n int) int {
 	return -1
 }
 
-// IntsFilter returns a slice with all ints with value n removed
-func IntsFilter(ints []int, n int) []int {
+// Filter returns a slice with all ints with value n removed
+func Filter(ints []int, n int) []int {
 	var result []int
 	for _, i := range ints {
 		if i != n {
@@ -287,27 +287,23 @@ func IntsFilter(ints []int, n int) []int {
 	return result
 }
 
-// IntsRemoveIndex removes the item at index while preserving the original slice
-func IntsRemoveIndex(ints []int, index int) []int {
+// RemoveIndex removes the item at index while preserving the original slice
+func RemoveIndex(ints []int, index int) []int {
 	tmp := make([]int, 0)
 	tmp = append(tmp, ints[:index]...)
 	return append(tmp, ints[index+1:]...)
 }
 
-func IntsAppendPreserve(ints []int, item int) []int {
+func AppendPreserve(ints []int, item int) []int {
 	tmp := make([]int, 0)
 	return append(append(tmp, ints...), item)
 }
 
-func IntsPrepend(ints []int, item int) []int {
+func Prepend(ints []int, item int) []int {
 	return append([]int{item}, ints...)
 }
 
-func IntsOutOfBounds(ints []int, index int) bool {
-	return index < 0 || index >= len(ints)
-}
-
-func CsvToInts(a string) [][]int {
+func ParseCsv(a string) [][]int {
 	var result [][]int
 
 	lines := strings.Split(a, "\n")
@@ -322,21 +318,21 @@ func CsvToInts(a string) [][]int {
 	return result
 }
 
-func IntsRemoveDuplicates(ints []int) []int {
-	var result []int
-
-	for _, i := range ints {
-		if !IntsContain(result, i) {
-			result = append(result, i)
-		}
-	}
-	return result
-}
-
-func IntsToCSV(ints []int) string {
+func ToCsv(ints []int) string {
 	var s []string
 	for _, i := range ints {
 		s = append(s, strconv.Itoa(i))
 	}
 	return strings.Join(s, ", ")
+}
+
+func RemoveDuplicates(ints []int) []int {
+	var result []int
+
+	for _, i := range ints {
+		if !SliceContains(result, i) {
+			result = append(result, i)
+		}
+	}
+	return result
 }

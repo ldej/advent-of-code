@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -32,15 +33,15 @@ func run(input string) int {
 		rules = append(rules, Rule{
 			Name: result["name"],
 			Values: [][]int{
-				{tools.ToInt(result["low1"]), tools.ToInt(result["high1"])},
-				{tools.ToInt(result["low2"]), tools.ToInt(result["high2"])},
+				{myints.ToInt(result["low1"]), myints.ToInt(result["high1"])},
+				{myints.ToInt(result["low2"]), myints.ToInt(result["high2"])},
 			},
 		})
 	}
 
-	//yourTicket := tools.CsvToInts(lines[1])
+	//yourTicket := tools.ParseCsv(lines[1])
 
-	var nearbyTickets = tools.CsvToInts(strings.TrimLeft(lines[2], "nearby tickets:\n"))
+	var nearbyTickets = myints.ParseCsv(strings.TrimLeft(lines[2], "nearby tickets:\n"))
 
 	invalid := 0
 	for _, ticket := range nearbyTickets {
@@ -63,7 +64,7 @@ func SumInvalidValues(ticket []int, rules []Rule) int {
 func ValidValue(value int, rules []Rule) bool {
 	for _, rule := range rules {
 		for _, values := range rule.Values {
-			if tools.InRange(value, values[0], values[1]) {
+			if myints.InRange(value, values[0], values[1]) {
 				return true
 			}
 		}

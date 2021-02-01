@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strconv"
 	"strings"
-
-	"github.com/ldej/advent-of-code/tools"
 )
 
 func main() {
@@ -40,8 +39,8 @@ func run(input string, start int) int {
 		}
 	}
 	fmt.Println(lowest)
-	wait := tools.MinList(lowest) - start
+	wait := myints.MinList(lowest) - start
 
-	busID := buses[tools.IntsIndexOf(lowest, tools.MinList(lowest))]
+	busID := buses[myints.IndexOf(lowest, myints.MinList(lowest))]
 	return wait * busID
 }

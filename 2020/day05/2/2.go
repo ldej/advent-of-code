@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -44,7 +45,7 @@ func run() int {
 	for rowNumber, seatNumbers := range rowMap {
 		if len(seatNumbers) != 8 && rowNumber > firstRow && rowNumber < lastRow {
 			for i := 0; i < 8; i++ {
-				if !tools.IntsContain(seatNumbers, i) {
+				if !myints.SliceContains(seatNumbers, i) {
 					mySeat = rowNumber*8 + i
 				}
 			}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -32,7 +33,7 @@ func run(input string) int {
 	positionY := 0
 
 	for _, line := range lines {
-		letter, number := line[0], tools.ToInt(line[1:])
+		letter, number := line[0], myints.ToInt(line[1:])
 
 		switch letter {
 		case 'F':
@@ -65,5 +66,5 @@ func run(input string) int {
 		}
 	}
 
-	return tools.ManhattanDistance(0, 0, positionX, positionY)
+	return myints.ManhattanDistance(0, 0, positionX, positionY)
 }

@@ -1,4 +1,4 @@
-package tools
+package myints
 
 import (
 	"fmt"
@@ -22,19 +22,19 @@ func TestManhattanDistance(t *testing.T) {
 }
 
 func TestIntsProduct(t *testing.T) {
-	total := IntsProduct([]int{78, 178, 75, 86, 39})
+	total := Product([]int{78, 178, 75, 86, 39})
 
 	assert.Equal(t, 3492520200, total)
 }
 
 func TestIntsSum(t *testing.T) {
-	total := IntsSum([]int{78, 178, 75, 86, 39})
+	total := Sum([]int{78, 178, 75, 86, 39})
 
 	assert.Equal(t, 456, total)
 }
 
 func TestIntSlicesEqual(t *testing.T) {
-	assert.True(t, IntSlicesEqual([]int{1, 2, 3}, []int{1, 2, 3}))
+	assert.True(t, SlicesEqual([]int{1, 2, 3}, []int{1, 2, 3}))
 }
 
 func TestInRange(t *testing.T) {
@@ -50,22 +50,22 @@ func TestOutRange(t *testing.T) {
 }
 
 func TestIntLength(t *testing.T) {
-	assert.Equal(t, 5, IntLength(12345))
+	assert.Equal(t, 5, Length(12345))
 }
 
 func ExampleIntLength() {
-	fmt.Println(IntLength(12345))
+	fmt.Println(Length(12345))
 	// Output: 5
 }
 
 func TestIntIndex(t *testing.T) {
-	assert.Equal(t, 3, IntDigitIndex(123, 2))
-	assert.Equal(t, 4, IntDigitIndex(123456789, 3))
+	assert.Equal(t, 3, Index(123, 2))
+	assert.Equal(t, 4, Index(123456789, 3))
 }
 
 func TestIntToSlice(t *testing.T) {
-	assert.Equal(t, []int{1, 2, 3}, IntToSlice(123))
-	assert.Equal(t, []int{1, 2, 3, 4, 5}, IntToSlice(12345))
+	assert.Equal(t, []int{1, 2, 3}, ToDigits(123))
+	assert.Equal(t, []int{1, 2, 3, 4, 5}, ToDigits(12345))
 }
 
 func TestGreatestCommonDivisor(t *testing.T) {
@@ -77,7 +77,7 @@ func TestGreatestCommonDivisorSlice(t *testing.T) {
 }
 
 func TestMapInts(t *testing.T) {
-	result := MapInts([]int{1, 2, 3, 4}, func(i, value int) int {
+	result := Map([]int{1, 2, 3, 4}, func(i, value int) int {
 		return value * value
 	})
 
@@ -86,8 +86,8 @@ func TestMapInts(t *testing.T) {
 
 func TestIntsWithout(t *testing.T) {
 	input := []int{1, 2, 3, 4, 5}
-	assert.Equal(t, []int{2, 3, 4, 5}, IntsRemoveIndex(input, 0))
+	assert.Equal(t, []int{2, 3, 4, 5}, RemoveIndex(input, 0))
 	assert.Equal(t, []int{1, 2, 3, 4, 5}, input)
-	assert.Equal(t, []int{1, 2, 3, 4}, IntsRemoveIndex([]int{1, 2, 3, 4, 5}, 4))
+	assert.Equal(t, []int{1, 2, 3, 4}, RemoveIndex([]int{1, 2, 3, 4, 5}, 4))
 	assert.Equal(t, []int{1, 2, 3, 4, 5}, input)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -21,19 +22,19 @@ func run(input string, expected int) int {
 	r := slidingWindow(ints, expected)
 	fmt.Println(r)
 
-	result := tools.MapInts(ints, func(i, v int) int {
+	result := myints.Map(ints, func(i, v int) int {
 		if res := findSliceSum(ints[i:], expected); res != nil {
-			return tools.IntsSumVar(tools.MinAndMax(res))
+			return myints.IntsSum(myints.MinAndMax(res))
 		}
 		return 0
 	})
 
-	return tools.IntsNonN(result, 0)
+	return myints.IntsNonN(result, 0)
 }
 
 func findSliceSum(ints []int, expected int) []int {
 	for j := 0; j < len(ints); j++ {
-		sum := tools.IntsSum(ints[:j])
+		sum := myints.Sum(ints[:j])
 
 		if sum == expected {
 			return ints[:j]
@@ -50,7 +51,7 @@ func slidingWindow(ints []int, expected int) int {
 
 	for {
 		if sum == expected {
-			return tools.IntsSumVar(tools.MinAndMax(ints[s:e]))
+			return myints.IntsSum(myints.MinAndMax(ints[s:e]))
 		} else if sum < expected {
 			e += 1
 			sum += ints[e]

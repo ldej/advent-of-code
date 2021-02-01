@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -24,7 +25,7 @@ func run() int {
 
 	for _, i := range input {
 		values := strings.Split(i, " ")
-		instructions = append(instructions, Instruction{Op: values[0], Value: tools.ToInt(values[1])})
+		instructions = append(instructions, Instruction{Op: values[0], Value: myints.ToInt(values[1])})
 	}
 
 	acc, _ := RunInstructions(instructions)

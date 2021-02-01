@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"github.com/ldej/advent-of-code/tools/myints"
 	"regexp"
 	"strings"
 )
@@ -61,14 +62,14 @@ func RegexNamedGroups(a string, regex string) map[string]string {
 
 // FindInt returns the first integer in the input
 func FindInt(input string) int {
-	return ToInt(CompiledIntRegex.FindString(input))
+	return myints.ToInt(CompiledIntRegex.FindString(input))
 }
 
 func FindInts(input string) []int {
 	matches := CompiledIntRegex.FindAllString(input, -1)
 	var ints []int
 	for _, i := range matches {
-		ints = append(ints, ToInt(i))
+		ints = append(ints, myints.ToInt(i))
 	}
 	return ints
 }

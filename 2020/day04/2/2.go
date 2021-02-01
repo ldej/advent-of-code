@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"github.com/ldej/advent-of-code/tools/mystrings"
 	"strconv"
 	"strings"
@@ -61,18 +62,18 @@ func PassportIsCorrect(line string) bool {
 func IsValid(key string, value string) bool {
 	switch key {
 	case "byr":
-		return tools.InRange(tools.ToInt(value), 1920, 2002)
+		return myints.InRange(myints.ToInt(value), 1920, 2002)
 	case "iyr":
-		return tools.InRange(tools.ToInt(value), 2010, 2020)
+		return myints.InRange(myints.ToInt(value), 2010, 2020)
 	case "eyr":
-		return tools.InRange(tools.ToInt(value), 2020, 2030)
+		return myints.InRange(myints.ToInt(value), 2020, 2030)
 	case "hgt":
 		if strings.HasSuffix(value, "cm") {
 			value = strings.TrimSuffix(value, "cm")
-			return tools.InRange(tools.ToInt(value), 150, 193)
+			return myints.InRange(myints.ToInt(value), 150, 193)
 		} else if strings.HasSuffix(value, "in") {
 			value = strings.TrimSuffix(value, "in")
-			return tools.InRange(tools.ToInt(value), 59, 76)
+			return myints.InRange(myints.ToInt(value), 59, 76)
 		}
 		return false
 	case "hcl":

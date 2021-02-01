@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
@@ -49,7 +50,7 @@ func BagsMap(input []string) map[string][]Bag {
 				bagsMap[color],
 				Bag{
 					Color: bag["color"],
-					Count: tools.ToInt(bag["count"]),
+					Count: myints.ToInt(bag["count"]),
 				},
 			)
 		}

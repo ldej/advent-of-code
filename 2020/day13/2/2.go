@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
-
-	"github.com/ldej/advent-of-code/tools"
 )
 
 func main() {
@@ -29,7 +28,7 @@ func run(input string) int {
 	times := make([]int, 0)
 
 	for _, in := range inputs {
-		times = append(times, tools.ToIntOr(in, -1))
+		times = append(times, myints.ToIntOr(in, -1))
 	}
 
 	// Chinese remainder theorem
@@ -39,10 +38,10 @@ func run(input string) int {
 
 	for i, t := range times {
 		if t > 0 {
-			for tools.GreatestCommonDivisor(earliest+i, t) != t {
+			for myints.GreatestCommonDivisor(earliest+i, t) != t {
 				earliest += departure
 			}
-			departure = (departure * t) / tools.GreatestCommonDivisor(departure, t)
+			departure = (departure * t) / myints.GreatestCommonDivisor(departure, t)
 		}
 	}
 

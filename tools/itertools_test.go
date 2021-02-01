@@ -1,6 +1,7 @@
 package tools
 
 import (
+	"github.com/ldej/advent-of-code/tools/myints"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -33,7 +34,7 @@ func TestGenMapInts(t *testing.T) {
 
 	var result []int
 	for result = range GenMapInts(input, func(i, v int) int { return v * v }) {
-		if IntsIndexOf(result, 9) >= 0 {
+		if myints.IndexOf(result, 9) >= 0 {
 			break
 		}
 	}

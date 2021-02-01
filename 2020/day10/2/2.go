@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 
 	"github.com/ldej/advent-of-code/tools"
 )
@@ -29,7 +30,7 @@ func run(input string) int {
 		possibleValues[value] = []int{value + 1, value + 2, value + 3}
 	}
 
-	result := calculate(possibleValues, make(map[int]int), tools.MaxSlice(ints)+3, 0)
+	result := calculate(possibleValues, make(map[int]int), myints.MaxSlice(ints)+3, 0)
 
 	return result
 }

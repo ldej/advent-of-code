@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/ldej/advent-of-code/tools/myints"
 	"github.com/ldej/advent-of-code/tools/mystrings"
 	"strings"
 
@@ -33,14 +34,14 @@ func run(input string) int {
 		rules = append(rules, Rule{
 			Name: result["name"],
 			Values: [][]int{
-				{tools.ToInt(result["low1"]), tools.ToInt(result["high1"])},
-				{tools.ToInt(result["low2"]), tools.ToInt(result["high2"])},
+				{myints.ToInt(result["low1"]), myints.ToInt(result["high1"])},
+				{myints.ToInt(result["low2"]), myints.ToInt(result["high2"])},
 			},
 		})
 	}
 
-	var yourTicket = tools.CsvToInts(strings.TrimLeft(lines[1], "your ticket:\n"))[0]
-	var nearbyTickets = tools.CsvToInts(strings.TrimLeft(lines[2], "nearby tickets:\n"))
+	var yourTicket = myints.ParseCsv(strings.TrimLeft(lines[1], "your ticket:\n"))[0]
+	var nearbyTickets = myints.ParseCsv(strings.TrimLeft(lines[2], "nearby tickets:\n"))
 
 	validRulesForIndex, invalid := ValidRulesForTickets(nearbyTickets, rules)
 	fmt.Println("Invalid count:", invalid)
@@ -130,7 +131,7 @@ func ValidRulesForIndex(ticket []int, rules []Rule) (bool, int, map[int][]string
 		var valid bool
 		for _, rule := range rules {
 			for _, values := range rule.Values {
-				if tools.InRange(value, values[0], values[1]) {
+				if myints.InRange(value, values[0], values[1]) {
 					validRulesForIndex[i] = append(validRulesForIndex[i], rule.Name)
 					valid = true
 				}
