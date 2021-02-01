@@ -43,7 +43,7 @@ func calculate(nrOfPlayers int, lastmarble int) int {
 
 	for i := 0; i <= lastmarble; i++ {
 		idx := i % nrOfPlayers
-		if currentMarble % 23 == 0 {
+		if currentMarble%23 == 0 {
 			players[idx] += currentMarble
 			// Move back 9
 			marbles = marbles.Move(-9)

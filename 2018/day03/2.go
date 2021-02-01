@@ -1,11 +1,11 @@
 package main
 
 import (
-	"io/ioutil"
-	"strings"
-	"regexp"
-		"strconv"
 	"fmt"
+	"io/ioutil"
+	"regexp"
+	"strconv"
+	"strings"
 )
 
 func main() {
@@ -27,8 +27,8 @@ func main() {
 		}
 
 		// Fill the fabric map
-		for i := resultsMap["Left"]; i < resultsMap["Left"] + resultsMap["Width"]; i++ {
-			for j := resultsMap["Top"]; j < resultsMap["Top"] + resultsMap["Height"]; j++ {
+		for i := resultsMap["Left"]; i < resultsMap["Left"]+resultsMap["Width"]; i++ {
+			for j := resultsMap["Top"]; j < resultsMap["Top"]+resultsMap["Height"]; j++ {
 				if column, foundCol := fabricMap[i]; foundCol {
 					if _, foundRow := column[j]; foundRow {
 						fabricMap[i][j] = append(fabricMap[i][j], resultsMap["Id"])

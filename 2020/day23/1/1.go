@@ -3,10 +3,11 @@ package main
 import (
 	"container/ring"
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/myints"
-	"github.com/ldej/advent-of-code/tools/myring"
 	"strconv"
 	"strings"
+
+	"github.com/ldej/advent-of-code/tools/myints"
+	"github.com/ldej/advent-of-code/tools/myring"
 )
 
 func main() {

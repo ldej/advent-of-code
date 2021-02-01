@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code/2018/common"
-	"strconv"
 	"fmt"
+	"strconv"
+
+	"github.com/ldej/advent-of-code/2018/common"
 )
 
 func main() {
@@ -55,7 +56,7 @@ func main() {
 	fmt.Println(count)
 }
 
-func distance(x1,y1, x2, y2 int) int {
+func distance(x1, y1, x2, y2 int) int {
 	x := 0
 	if x1 > x2 {
 		x = x1 - x2

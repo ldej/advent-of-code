@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code/2018/common"
 	"fmt"
 	"strings"
+
+	"github.com/ldej/advent-of-code/2018/common"
 )
 
 func main() {
@@ -29,7 +30,7 @@ func calculateLength(linestring string, skip int32) int {
 		for idx := 0; idx < len(line); idx += 1 {
 
 			// Don't forget to copy the last letter
-			if idx == len(line) - 1 {
+			if idx == len(line)-1 {
 				newline = append(newline, line[idx])
 				continue
 			}

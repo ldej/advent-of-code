@@ -1,10 +1,11 @@
 package tools
 
 import (
-	"github.com/ldej/advent-of-code/tools/myints"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/ldej/advent-of-code/tools/myints"
 )
 
 func TestCombinationsInt(t *testing.T) {

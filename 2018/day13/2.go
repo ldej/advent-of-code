@@ -28,7 +28,7 @@ type car struct {
 	Y            int
 	Orientation  byte
 	NextCrossing direction
-	ID int
+	ID           int
 }
 
 func main() {

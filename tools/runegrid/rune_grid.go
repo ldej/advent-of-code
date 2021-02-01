@@ -2,8 +2,9 @@ package runegrid
 
 import (
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/myints"
 	"log"
+
+	"github.com/ldej/advent-of-code/tools/myints"
 )
 
 type RuneGrid [][]rune

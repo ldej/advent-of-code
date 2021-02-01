@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/sets"
 	"sort"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/sets"
 )
 
 func main() {

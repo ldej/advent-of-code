@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code/2018/common"
-	"strings"
 	"fmt"
-	)
+	"strings"
+
+	"github.com/ldej/advent-of-code/2018/common"
+)
 
 func main() {
 	results := common.ReadAllLines("./day12/input.txt", `(?P<data>.*)`)
@@ -22,7 +23,7 @@ func main() {
 		}
 	}
 
-	newGeneration, offset := doGenerations(initialState, rules,500)
+	newGeneration, offset := doGenerations(initialState, rules, 500)
 
 	total := count(newGeneration, offset)
 

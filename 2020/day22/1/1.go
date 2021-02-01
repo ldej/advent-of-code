@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/queue"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/queue"
 )
 
 func main() {

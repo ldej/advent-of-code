@@ -1,9 +1,10 @@
 package tools
 
 import (
-	"github.com/ldej/advent-of-code/tools/myints"
 	"regexp"
 	"strings"
+
+	"github.com/ldej/advent-of-code/tools/myints"
 )
 
 const (

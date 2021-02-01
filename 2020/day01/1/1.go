@@ -19,7 +19,7 @@ func run(expected int) int {
 			if ib == ia {
 				continue
 			}
-			if a + b == expected {
+			if a+b == expected {
 				fmt.Printf("%d + %d = %d\n", a, b, expected)
 				fmt.Printf("%d * %d= %d\n", a, b, a*b)
 				return a * b

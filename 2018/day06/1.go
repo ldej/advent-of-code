@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code/2018/common"
-	"strconv"
 	"fmt"
+	"strconv"
+
+	"github.com/ldej/advent-of-code/2018/common"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 	for _, result := range results {
 		x, _ := strconv.Atoi(result["x"])
 		y, _ := strconv.Atoi(result["y"])
-		input = append(input, []int{x,y})
+		input = append(input, []int{x, y})
 	}
 
 	for resultIndex, c := range input {
@@ -47,7 +48,7 @@ func main() {
 
 	for rowIdx, row := range coordinates {
 		for colIdx, res := range row {
-			if rowIdx == 0 || rowIdx == gridSize - 1 || colIdx == 0 || colIdx == gridSize - 1 {
+			if rowIdx == 0 || rowIdx == gridSize-1 || colIdx == 0 || colIdx == gridSize-1 {
 				edge[res[1]] = true
 			}
 		}
@@ -74,7 +75,7 @@ func main() {
 	fmt.Println(max)
 }
 
-func distance(x1,y1, x2, y2 int) int {
+func distance(x1, y1, x2, y2 int) int {
 	x := 0
 	if x1 > x2 {
 		x = x1 - x2

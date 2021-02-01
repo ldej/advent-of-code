@@ -33,7 +33,7 @@ func main() {
 	originX := 0
 	originY := 0
 
-	grid, originX, originY = drawLine(grid, line1, originX, originY,11)
+	grid, originX, originY = drawLine(grid, line1, originX, originY, 11)
 	grid, originX, originY = drawLine(grid, line2, originX, originY, 12)
 
 	//common.Print2D(grid, charForInt)
@@ -42,7 +42,7 @@ func main() {
 	for y, row := range grid {
 		for x, cell := range row {
 			if cell == 5 {
-				distance := common.Abs(originX - x) + common.Abs(originY - y)
+				distance := common.Abs(originX-x) + common.Abs(originY-y)
 				if distance < shortestDistance {
 					shortestDistance = distance
 				}
@@ -94,13 +94,13 @@ func drawLine(grid [][]int, line []string, startX int, startY int, lineNumber in
 			case "R":
 				currentX += 1
 				if currentX >= len(grid[0]) {
-					grid = extendGridRight(grid, steps - i)
+					grid = extendGridRight(grid, steps-i)
 				}
 
 			case "L":
 				currentX -= 1
 				if currentX < 0 {
-					grid = extendGridLeft(grid, steps - i)
+					grid = extendGridLeft(grid, steps-i)
 					currentX += steps - i
 					originX += steps - i
 				}
@@ -108,13 +108,13 @@ func drawLine(grid [][]int, line []string, startX int, startY int, lineNumber in
 			case "D":
 				currentY += 1
 				if currentY >= len(grid) {
-					grid = extendGridDown(grid, steps - i)
+					grid = extendGridDown(grid, steps-i)
 				}
 
 			case "U":
 				currentY -= 1
 				if currentY < 0 {
-					grid = extendGridUp(grid, steps - i)
+					grid = extendGridUp(grid, steps-i)
 					currentY += steps - i
 					originY += steps - i
 				}
@@ -131,7 +131,7 @@ func drawLine(grid [][]int, line []string, startX int, startY int, lineNumber in
 	return grid, originX, originY
 }
 
-func getInstruction(thing string) (string, int)  {
+func getInstruction(thing string) (string, int) {
 	direction, count := string([]rune(thing)[0]), thing[1:]
 	a, _ := strconv.Atoi(count)
 	return direction, a

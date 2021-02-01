@@ -23,7 +23,7 @@ func run(expected int) int {
 				if ia == ic || ib == ic {
 					continue
 				}
-				if a + b + c == expected {
+				if a+b+c == expected {
 					fmt.Printf("%d + %d + %d = %d\n", a, b, c, expected)
 					fmt.Printf("%d * %d * %d = %d\n", a, b, c, a*b*c)
 					return a * b * c

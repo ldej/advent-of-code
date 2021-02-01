@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 	"sort"
-
-	"github.com/ldej/advent-of-code/2018/common"
 	"strings"
 	"time"
+
+	"github.com/ldej/advent-of-code/2018/common"
 )
 
 type point struct {
-	X int
-	Y int
+	X     int
+	Y     int
 	Steps int
 }
 
@@ -75,7 +75,7 @@ func main() {
 				idx -= 1
 				killed = false
 			}
-			finishedRound = idx == len(c) - 1
+			finishedRound = idx == len(c)-1
 			if somebodyWins(c) {
 				somebodyWon = true
 				break
@@ -91,7 +91,7 @@ func main() {
 	}
 
 	hp := calculateHP(c)
-	fmt.Println(rounds, "*", hp, "=", rounds * hp)
+	fmt.Println(rounds, "*", hp, "=", rounds*hp)
 	return
 }
 
@@ -128,7 +128,7 @@ func move(char character, c characters, grid []string) (character, characters) {
 	}
 	targets := findTargets(enemies, grid)
 	//reachable, _ := findReachable(char.Point, c, targets, grid)
-	p, found := findNearest(char.Point, targets, c ,grid)
+	p, found := findNearest(char.Point, targets, c, grid)
 	if !found {
 		return char, c
 	}
@@ -412,7 +412,7 @@ func printDistanceMap(distanceMap [][]int, grid []string, c characters) {
 				if grid[j][i] == '#' {
 					fmt.Print(string(grid[j][i]))
 				} else {
-					if distanceMap[j][i] >=0 && distanceMap[j][i] < 10 {
+					if distanceMap[j][i] >= 0 && distanceMap[j][i] < 10 {
 						fmt.Print(distanceMap[j][i])
 					} else {
 						fmt.Print(string(grid[j][i]))

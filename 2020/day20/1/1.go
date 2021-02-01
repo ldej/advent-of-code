@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/myrunes"
-	"github.com/ldej/advent-of-code/tools/runegrid"
-	"github.com/ldej/advent-of-code/tools/sets"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/myrunes"
+	"github.com/ldej/advent-of-code/tools/runegrid"
+	"github.com/ldej/advent-of-code/tools/sets"
 )
 
 func main() {

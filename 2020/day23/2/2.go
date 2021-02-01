@@ -3,10 +3,12 @@ package main
 import (
 	"container/ring"
 	"fmt"
+	"time"
+
 	"github.com/cheggaaa/pb/v3"
+
 	"github.com/ldej/advent-of-code/tools/myints"
 	"github.com/ldej/advent-of-code/tools/myring"
-	"time"
 )
 
 func main() {

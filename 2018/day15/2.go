@@ -100,7 +100,7 @@ func do(grid []string, elvenBoost int) bool {
 			rounds += 1
 			fmt.Println("Rounds: ", rounds)
 		}
-		fmt.Println("Elven attack:", 3 + elvenBoost)
+		fmt.Println("Elven attack:", 3+elvenBoost)
 	}
 
 	hp := calculateHP(c)

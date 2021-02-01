@@ -73,7 +73,7 @@ func moveCars(c cars, grid []string) (cars, int, int) {
 		switch car.Orientation {
 		case '>':
 			if _, found := getCarOnPosition(c, car.X+1, car.Y); found {
-				return c, car.X+1, car.Y
+				return c, car.X + 1, car.Y
 			} else {
 				switch grid[car.Y][car.X+1] {
 				case '/':
@@ -99,7 +99,7 @@ func moveCars(c cars, grid []string) (cars, int, int) {
 
 		case '<':
 			if _, found := getCarOnPosition(c, car.X-1, car.Y); found {
-				return c, car.X+1, car.Y
+				return c, car.X + 1, car.Y
 			} else {
 				switch grid[car.Y][car.X-1] {
 				case '/':
@@ -124,7 +124,7 @@ func moveCars(c cars, grid []string) (cars, int, int) {
 			}
 		case '^':
 			if _, found := getCarOnPosition(c, car.X, car.Y-1); found {
-				return c, car.X, car.Y-1
+				return c, car.X, car.Y - 1
 			} else {
 				switch grid[car.Y-1][car.X] {
 				case '/':
@@ -150,7 +150,7 @@ func moveCars(c cars, grid []string) (cars, int, int) {
 
 		case 'v':
 			if _, found := getCarOnPosition(c, car.X, car.Y+1); found {
-				return c, car.X, car.Y+1
+				return c, car.X, car.Y + 1
 			} else {
 				switch grid[car.Y+1][car.X] {
 				case '/':

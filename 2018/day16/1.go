@@ -16,7 +16,7 @@ type statement struct {
 	Index        int
 }
 
-var opcodeMap = map[string]func([]int, int, int, int) []int {
+var opcodeMap = map[string]func([]int, int, int, int) []int{
 	"addr": addr,
 	"addi": addi,
 	"mulr": mulr,
@@ -35,7 +35,7 @@ var opcodeMap = map[string]func([]int, int, int, int) []int {
 	"aqrr": eqrr,
 }
 
-var opcodes = []func([]int, int, int, int) []int {
+var opcodes = []func([]int, int, int, int) []int{
 	addr,
 	addi,
 	mulr,

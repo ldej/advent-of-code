@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/myints"
 	"strconv"
 	"strings"
+
+	"github.com/ldej/advent-of-code/tools/myints"
 )
 
 func main() {

@@ -80,13 +80,13 @@ func drawLine(grid [][]int, line []string, startX int, startY int, addTrail bool
 			case "R":
 				currentX += 1
 				if currentX >= len(grid[0]) {
-					grid = extendGridRight(grid, steps - i)
+					grid = extendGridRight(grid, steps-i)
 				}
 
 			case "L":
 				currentX -= 1
 				if currentX < 0 {
-					grid = extendGridLeft(grid, steps - i)
+					grid = extendGridLeft(grid, steps-i)
 					currentX += steps - i
 					originX += steps - i
 				}
@@ -94,13 +94,13 @@ func drawLine(grid [][]int, line []string, startX int, startY int, addTrail bool
 			case "D":
 				currentY += 1
 				if currentY >= len(grid) {
-					grid = extendGridDown(grid, steps - i)
+					grid = extendGridDown(grid, steps-i)
 				}
 
 			case "U":
 				currentY -= 1
 				if currentY < 0 {
-					grid = extendGridUp(grid, steps - i)
+					grid = extendGridUp(grid, steps-i)
 					currentY += steps - i
 					originY += steps - i
 				}
@@ -110,7 +110,7 @@ func drawLine(grid [][]int, line []string, startX int, startY int, addTrail bool
 				grid[currentY][currentX] = totalStepNumber
 			} else {
 				// found the  other line
-				if grid[currentY][currentX] > 0 && grid[currentY][currentX] + totalStepNumber < shortestCrossing{
+				if grid[currentY][currentX] > 0 && grid[currentY][currentX]+totalStepNumber < shortestCrossing {
 					shortestCrossing = grid[currentY][currentX] + totalStepNumber
 				}
 			}
@@ -120,7 +120,7 @@ func drawLine(grid [][]int, line []string, startX int, startY int, addTrail bool
 	return grid, originX, originY
 }
 
-func getInstruction(thing string) (string, int)  {
+func getInstruction(thing string) (string, int) {
 	direction, count := string([]rune(thing)[0]), thing[1:]
 	a, _ := strconv.Atoi(count)
 	return direction, a

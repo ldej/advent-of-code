@@ -1,9 +1,8 @@
 package main
 
 import (
-	"sort"
-
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/ldej/advent-of-code/2018/common"

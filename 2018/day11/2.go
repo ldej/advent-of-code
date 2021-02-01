@@ -6,18 +6,17 @@ import (
 )
 
 type result struct {
-	X int
-	Y int
+	X     int
+	Y     int
 	Value int
-	Size int
+	Size  int
 }
 
 const (
 	gridSerialNumber = 1718
-	maxSquareSize = 150
-	gridSize = 300
+	maxSquareSize    = 150
+	gridSize         = 300
 )
-
 
 func main() {
 	channel := make(chan result)
@@ -62,11 +61,11 @@ func getLargestPower(channel chan result, squareSize int) {
 	x := 0
 	y := 0
 
-	for j := 0; j < gridSize - squareSize; j++ {
-		for i := 0; i < gridSize - squareSize; i++ {
+	for j := 0; j < gridSize-squareSize; j++ {
+		for i := 0; i < gridSize-squareSize; i++ {
 			cellSum := 0
-			for l := 0; l < squareSize; l ++ {
-				for k := 0; k < squareSize; k ++ {
+			for l := 0; l < squareSize; l++ {
+				for k := 0; k < squareSize; k++ {
 					cellSum += grid[j+l][i+k]
 				}
 			}
@@ -78,10 +77,10 @@ func getLargestPower(channel chan result, squareSize int) {
 		}
 	}
 	channel <- result{
-		X: x,
-		Y: y,
+		X:     x,
+		Y:     y,
 		Value: maxValue,
-		Size: squareSize,
+		Size:  squareSize,
 	}
 }
 

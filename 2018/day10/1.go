@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code/2018/common"
-		"strconv"
-		"strings"
 	"fmt"
+	"strconv"
+	"strings"
+
+	"github.com/ldej/advent-of-code/2018/common"
 )
 
 type point struct {
-	X int
-	Y int
+	X  int
+	Y  int
 	DX int
 	DY int
 }
@@ -40,16 +41,16 @@ func main() {
 		}
 
 		points = append(points, &point{
-			X: x,
-			Y: y,
+			X:  x,
+			Y:  y,
 			DX: dx,
 			DY: dy,
 		})
 	}
 
 	// TODO fail
-	for i := 0; i < 100000; i ++ {
-		if i % 1000 == 0 {
+	for i := 0; i < 100000; i++ {
+		if i%1000 == 0 {
 			printPoints(points, minx, maxx, miny, maxy)
 		}
 		minx, maxx, miny, maxy = movePoints(points)
@@ -68,7 +69,7 @@ func printPoints(points []*point, minx, maxx, miny, maxy int) {
 		for x := minx; x < maxx; x += xpoint {
 			printed := false
 			for _, point := range points {
-				if point.X > x && point.X <= x + xpoint && point.Y > y && point.Y <= y + ypoint {
+				if point.X > x && point.X <= x+xpoint && point.Y > y && point.Y <= y+ypoint {
 					if !printed {
 						line = append(line, "X")
 					}
@@ -89,7 +90,7 @@ func printPoints(points []*point, minx, maxx, miny, maxy int) {
 	fmt.Println(total)
 }
 
-func movePoints(points []*point) (int, int, int, int){
+func movePoints(points []*point) (int, int, int, int) {
 	minx := 100000
 	maxx := 0
 	miny := 100000

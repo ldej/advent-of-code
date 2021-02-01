@@ -1,16 +1,16 @@
 package main
 
 import (
-		"fmt"
+	"fmt"
 )
 
 func main() {
 	after := 846601
-	recipes :=  []int{3, 7}
+	recipes := []int{3, 7}
 	elf1Idx := 0
 	elf2Idx := 1
 
-	for len(recipes) < after*2 + 2 {
+	for len(recipes) < after*2+2 {
 
 		sum := recipes[elf1Idx] + recipes[elf2Idx]
 		digits := splitInt(sum)
@@ -31,7 +31,7 @@ func main() {
 		fmt.Println()
 	}
 
-	nrs := recipes[after:after+10]
+	nrs := recipes[after : after+10]
 	for _, nr := range nrs {
 		fmt.Printf("%d", nr)
 	}

@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/ldej/advent-of-code/tools/myints"
 	"strings"
 	"time"
 
 	"github.com/cheggaaa/pb/v3"
+
+	"github.com/ldej/advent-of-code/tools/myints"
 )
 
 func main() {

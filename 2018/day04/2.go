@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/ldej/advent-of-code/2018/common"
-	"strconv"
 	"fmt"
+	"strconv"
 	"strings"
+
+	"github.com/ldej/advent-of-code/2018/common"
 )
 
 func main() {

@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
 	"github.com/ldej/advent-of-code/2018/common"
-	"fmt"
 )
 
 type operation struct {
@@ -14,13 +14,13 @@ type operation struct {
 }
 
 type statement struct {
-	Input        []int
+	Input     []int
 	Operation operation
-	Output       []int
-	Index        int
+	Output    []int
+	Index     int
 }
 
-var opcodeMap = map[string]func([]int, int, int, int) []int {
+var opcodeMap = map[string]func([]int, int, int, int) []int{
 	"addr": addr,
 	"addi": addi,
 	"mulr": mulr,
@@ -182,13 +182,13 @@ func main() {
 		output = strings.Replace(output, "]", "", 1)
 
 		statements = append(statements, statement{
-			Input:        toInt(strings.Split(input, ", ")),
+			Input: toInt(strings.Split(input, ", ")),
 			Operation: operation{
 				OpNumber:     opNumber,
 				OpParameters: params,
 			},
-			Output:       toInt(strings.Split(output, ", ")),
-			Index:        i,
+			Output: toInt(strings.Split(output, ", ")),
+			Index:  i,
 		})
 	}
 
@@ -201,7 +201,7 @@ func main() {
 		}
 		vals := toInt(strings.Split(oper, " "))
 		program = append(program, operation{
-			OpNumber: vals[0],
+			OpNumber:     vals[0],
 			OpParameters: vals[1:],
 		})
 	}
@@ -276,7 +276,7 @@ func filterDuplicates(a []string) []string {
 	return names
 }
 
-func findOpNumberMap(onm map[int][]string, fonm map[int]string) map[int]string{
+func findOpNumberMap(onm map[int][]string, fonm map[int]string) map[int]string {
 	allEmpty := true
 	for number, names := range onm {
 		if len(names) > 0 {

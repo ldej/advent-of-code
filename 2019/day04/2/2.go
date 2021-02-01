@@ -26,7 +26,7 @@ func main() {
 }
 
 func isIncreasing(numbers ...int) bool {
-	for i := 0; i < len(numbers) - 1; i++ {
+	for i := 0; i < len(numbers)-1; i++ {
 		if numbers[i] > numbers[i+1] {
 			return false
 		}
@@ -35,7 +35,7 @@ func isIncreasing(numbers ...int) bool {
 }
 
 func hasExactlyTwoAdjacent(numbers ...int) bool {
-	for i := 0; i < len(numbers) - 1; i++ {
+	for i := 0; i < len(numbers)-1; i++ {
 		previous := -1
 		if i > 0 {
 			previous = numbers[i-1]
