@@ -336,3 +336,11 @@ func RemoveDuplicates(ints []int) []int {
 	}
 	return result
 }
+
+func IsOdd(i int) bool {
+	return i&1 == 1
+}
+
+func IsEven(i int) bool {
+	return i&1 == 0
+}

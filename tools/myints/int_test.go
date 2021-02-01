@@ -91,3 +91,23 @@ func TestIntsWithout(t *testing.T) {
 	assert.Equal(t, []int{1, 2, 3, 4}, RemoveIndex([]int{1, 2, 3, 4, 5}, 4))
 	assert.Equal(t, []int{1, 2, 3, 4, 5}, input)
 }
+
+func TestIsOdd(t *testing.T) {
+	assert.True(t, IsOdd(-3))
+	assert.False(t, IsOdd(-2))
+	assert.True(t, IsOdd(-1))
+	assert.False(t, IsOdd(0))
+	assert.True(t, IsOdd(1))
+	assert.False(t, IsOdd(2))
+	assert.True(t, IsOdd(3))
+}
+
+func TestIsEven(t *testing.T) {
+	assert.False(t, IsEven(-3))
+	assert.True(t, IsEven(-2))
+	assert.False(t, IsEven(-1))
+	assert.True(t, IsEven(0))
+	assert.False(t, IsEven(1))
+	assert.True(t, IsEven(2))
+	assert.False(t, IsEven(3))
+}
