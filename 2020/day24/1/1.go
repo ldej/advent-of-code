@@ -65,6 +65,7 @@ func run(input string) int {
 
 // https://www.redblobgames.com/grids/hexagons/
 // using the Offset coordinates - "even-r" horizontal layout shoves even rows right
+// In hindsight, doubled coordinates would have been easier: https://github.com/mnml/aoc/blob/master/2020/24/2.go
 func adjust(dir uint8, y int) int {
 	if dir == 'e' && myints.IsOdd(y) {
 		return 1
