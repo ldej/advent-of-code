@@ -4,7 +4,13 @@ test:
 bench:
 	(cd tools && go test -bench=.)
 
+# Use 'make format DIR=2020' to limit the path
 format:
-	for f in $$(find . -type f -name *.go); do \
+	@(if ! [ -x "$$(command -v goimports-reviser)" ]; then \
+		echo "installing github.com/incu6us/goimports-reviser/v2"; \
+		go install github.com/incu6us/goimports-reviser/v2; \
+	fi)
+
+	@(for f in $$(find $(DIR). -type f -name *.go); do \
 		goimports-reviser -rm-unused -file-path $$f; \
-	done
+	done)
