@@ -141,6 +141,16 @@ func Filter(strs []string, filter string) []string {
 	return result
 }
 
+func FilterFunc(input []string, f func(string) bool) []string {
+	var output []string
+	for _, line := range input {
+		if f(line) {
+			output = append(output, line)
+		}
+	}
+	return output
+}
+
 // MapStrings applies a function to every string in a slice
 // a new slice is returned
 func MapStrings(strs []string, f func(index int, value string) string) []string {

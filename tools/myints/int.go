@@ -344,3 +344,15 @@ func IsOdd(i int) bool {
 func IsEven(i int) bool {
 	return i&1 == 0
 }
+
+func SlidingWindow(ints []int, size int) chan []int {
+	ch := make(chan []int)
+
+	go func() {
+		for i := 1; i < len(ints)+1-size; i++ {
+			ch <- ints[i:i+size]
+		}
+		close(ch)
+	}()
+	return ch
+}

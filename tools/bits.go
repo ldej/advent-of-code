@@ -3,6 +3,7 @@ package tools
 import (
 	"fmt"
 	"log"
+	"strconv"
 )
 
 func SetBit(input int, value int, position int) int {
@@ -23,4 +24,12 @@ func ToBinary(input int) string {
 
 func ToBinaryPadded(input int, size int) string {
 	return fmt.Sprintf("%0*b", size, input)
+}
+
+func BinaryToInt(input string) int64 {
+	x, err := strconv.ParseInt(input, 2, 64)
+	if err != nil {
+		log.Fatalf("Could not convert %s to int: %v", input, err)
+	}
+	return x
 }
