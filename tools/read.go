@@ -6,6 +6,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/ldej/advent-of-code/tools/myints"
 )
 
 func ReadBytes(location string) []byte {
@@ -169,4 +171,24 @@ func ReadStringsDoubleNewlines(location string) []string {
 		result = append(result, strings.Trim(line, "\n"))
 	}
 	return result
+}
+
+func ReadIntGrid(location string) IntGrid {
+	var grid IntGrid
+	content, err := ioutil.ReadFile(location)
+	if err != nil {
+		log.Fatal(err)
+	}
+	lines := strings.Split(string(content), "\n")
+	for _, line := range lines {
+		if len(line) == 0 {
+			continue
+		}
+		var numbers []int
+		for _, char := range line {
+			numbers = append(numbers, myints.ToInt(string(char)))
+		}
+		grid = append(grid, numbers)
+	}
+	return grid
 }

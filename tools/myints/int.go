@@ -350,7 +350,7 @@ func SlidingWindow(ints []int, size int) chan []int {
 
 	go func() {
 		for i := 1; i < len(ints)+1-size; i++ {
-			ch <- ints[i:i+size]
+			ch <- ints[i : i+size]
 		}
 		close(ch)
 	}()
