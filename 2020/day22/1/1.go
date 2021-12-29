@@ -24,7 +24,7 @@ type Player struct {
 }
 
 func run(input string) int {
-	lines := tools.ReadStringsDoubleNewlines(input)
+	lines := tools.ReadStringsDoubleNewlines()
 	var players []Player
 	for _, line := range lines {
 		parts := strings.Split(line, ":\n")

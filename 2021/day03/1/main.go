@@ -11,7 +11,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int64 {
-	input := tools.ReadStrings("./2021/day03/input.txt")
+	input := tools.ReadStrings()
 	length := len(input[0])
 
 	gamma := make([]rune, length)

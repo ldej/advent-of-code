@@ -27,6 +27,18 @@ func (g IntGrid) Print() {
 	}
 }
 
+func NewIntGrid(x int, y int, v int) IntGrid {
+	g := make(IntGrid, y)
+	for i := 0; i < x; i++ {
+		row := make([]int, x)
+		for j := 0; j < y; j++ {
+			row[j] = v
+		}
+		g[i] = row
+	}
+	return g
+}
+
 func (g IntGrid) At(rowIndex, columnIndex int) int {
 	return g[rowIndex][columnIndex]
 }

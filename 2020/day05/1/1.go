@@ -13,7 +13,7 @@ func main() {
 }
 
 func run() int {
-	lines := tools.ReadStrings("./2020/day05/input.txt")
+	lines := tools.ReadStrings()
 	nrows := 127
 	ncols := 8
 

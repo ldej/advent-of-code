@@ -12,7 +12,7 @@ func main() {
 }
 
 func run(expected int) int {
-	ints := tools.ReadInts("./2020/day01/input.txt")
+	ints := tools.ReadInts()
 
 	for ia, a := range ints {
 		for ib, b := range ints {

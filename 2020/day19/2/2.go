@@ -20,7 +20,7 @@ func main() {
 }
 
 func run(input string) int {
-	lines := tools.ReadStringsDoubleNewlines(input)
+	lines := tools.ReadStringsDoubleNewlines()
 	ruleLines := strings.Split(lines[0], "\n")
 	messages := strings.Split(lines[1], "\n")
 

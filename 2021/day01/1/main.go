@@ -12,7 +12,7 @@ func main() {
 }
 func run() int {
 	current, increased := 0, 0
-	ints := tools.ReadInts("./2021/day01/input.txt")
+	ints := tools.ReadInts()
 	current, ints = ints[0], ints[1:]
 
 	for _, i := range ints {

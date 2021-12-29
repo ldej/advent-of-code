@@ -11,7 +11,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	fishes := tools.ReadIntCsvOneLine("./2021/day06/input.txt")
+	fishes := tools.ReadIntCsvOneLine()
 
 	for i := 0; i < 80; i++ {
 		var newFishes []int

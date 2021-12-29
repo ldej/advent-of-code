@@ -25,7 +25,7 @@ const (
 )
 
 func run(input string) int {
-	lines := tools.ReadStrings(input)
+	lines := tools.ReadStrings()
 
 	direction := East
 

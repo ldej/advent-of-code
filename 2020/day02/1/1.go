@@ -14,7 +14,7 @@ func main() {
 }
 
 func run() int {
-	result := tools.ReadRegex("./2020/day02/input.txt", `(?P<min>\d+)-(?P<max>\d+) (?P<letter>\w): (?P<password>.*)`)
+	result := tools.ReadRegex(`(?P<min>\d+)-(?P<max>\d+) (?P<letter>\w): (?P<password>.*)`)
 
 	valid := 0
 	for _, line := range result {

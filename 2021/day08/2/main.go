@@ -16,7 +16,7 @@ func main() {
 }
 
 func run() int {
-	input := tools.ReadStrings("./2021/day08/input.txt")
+	input := tools.ReadStrings()
 
 	sum := 0
 

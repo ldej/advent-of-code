@@ -61,8 +61,8 @@ func MinListIndex(ints []int) int {
 }
 
 func MinAndMax(ints []int) (int, int) {
-	min := math.MaxInt32
-	max := math.MinInt32
+	min := math.MaxInt64
+	max := math.MinInt64
 
 	for _, i := range ints {
 		if i < min {

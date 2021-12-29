@@ -1,13 +1,36 @@
 package tools
 
 import (
+	"io/ioutil"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
+func PrepareFile(name string) func() {
+	file, err := ioutil.ReadFile(name)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("../input.txt", file, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return func() {
+		err = os.Remove("../input.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+}
+
 func TestReadInts(t *testing.T) {
-	ints := ReadInts("./testdata/ints.txt")
+	clean := PrepareFile("./testdata/ints.txt")
+	defer clean()
+
+	ints := ReadInts()
 
 	expected := []int{1757, 1890, -1750, 1440}
 
@@ -15,7 +38,10 @@ func TestReadInts(t *testing.T) {
 }
 
 func TestReadIntSlice(t *testing.T) {
-	ints := ReadIntSlice("./testdata/int_slice.txt")
+	clean := PrepareFile("./testdata/int_slice.txt")
+	defer clean()
+
+	ints := ReadIntSlice()
 
 	expected := []int{10, -4, 8, 12}
 
@@ -23,7 +49,10 @@ func TestReadIntSlice(t *testing.T) {
 }
 
 func TestReadIntSlices(t *testing.T) {
-	ints := ReadIntSlices("./testdata/int_slices.txt")
+	clean := PrepareFile("./testdata/int_slices.txt")
+	defer clean()
+
+	ints := ReadIntSlices()
 
 	expected := [][]int{
 		{5806, 6444, 1281, 38},
@@ -36,7 +65,10 @@ func TestReadIntSlices(t *testing.T) {
 }
 
 func TestReadIntCsv(t *testing.T) {
-	ints := ReadIntCsv("./testdata/int_csv.txt")
+	clean := PrepareFile("./testdata/int_csv.txt")
+	defer clean()
+
+	ints := ReadIntCsv()
 
 	expected := [][]int{
 		{108, 350},
@@ -48,14 +80,20 @@ func TestReadIntCsv(t *testing.T) {
 }
 
 func TestReadIntCsvOneLine(t *testing.T) {
-	ints := ReadIntCsvOneLine("./testdata/int_csv2.txt")
+	clean := PrepareFile("./testdata/int_csv2.txt")
+	defer clean()
+
+	ints := ReadIntCsvOneLine()
 
 	expected := []int{1, 0, 0, 3, 1, 1, -2, 3, 1, 3, 4, 3}
 	assert.Equal(t, expected, ints)
 }
 
 func TestReadStrings(t *testing.T) {
-	strings := ReadStrings("./testdata/strings.txt")
+	clean := PrepareFile("./testdata/strings.txt")
+	defer clean()
+
+	strings := ReadStrings()
 
 	expected := []string{
 		"rmyxgdlihczskunpfwbgqoeybv",
@@ -68,7 +106,10 @@ func TestReadStrings(t *testing.T) {
 }
 
 func TestReadStringSlices(t *testing.T) {
-	strings := ReadStringSlices("./testdata/string_slices.txt")
+	clean := PrepareFile("./testdata/string_slices.txt")
+	defer clean()
+
+	strings := ReadStringSlices()
 
 	expected := [][]string{
 		{"pphsv", "ojtou", "brvhsj", "cer"},
@@ -81,7 +122,10 @@ func TestReadStringSlices(t *testing.T) {
 }
 
 func TestReadString(t *testing.T) {
-	str := ReadString("./testdata/string.txt")
+	clean := PrepareFile("./testdata/string.txt")
+	defer clean()
+
+	str := ReadString()
 
 	assert.Equal(t, "wWuUJjXxqQrqQmKBzZbZzLlkWNqQntxXBZzM", str)
 }

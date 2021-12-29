@@ -12,7 +12,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	input := tools.ReadStrings("./2021/day08/input.txt")
+	input := tools.ReadStrings()
 
 	counter := map[int]int{}
 	for _, line := range input {

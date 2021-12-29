@@ -13,7 +13,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	field := tools.ReadIntGrid("./2021/day09/input.txt")
+	field := tools.ReadIntGrid()
 
 	lowestPoints := getLowestPoints(field)
 

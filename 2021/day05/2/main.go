@@ -18,7 +18,7 @@ func main() {
 type Line []image.Point
 
 func run() int {
-	inputs := tools.ReadStrings("./2021/day05/input.txt")
+	inputs := tools.ReadStrings()
 
 	var lines []Line
 	for _, input := range inputs {

@@ -19,7 +19,7 @@ func main() {
 }
 
 func run(input string) int {
-	lines := tools.ReadStrings(input)
+	lines := tools.ReadStrings()
 
 	var result int
 	for _, line := range lines {

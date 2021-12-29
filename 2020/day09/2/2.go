@@ -17,7 +17,7 @@ func main() {
 }
 
 func run(input string, expected int) int {
-	ints := tools.ReadInts(input)
+	ints := tools.ReadInts()
 
 	r := slidingWindow(ints, expected)
 	fmt.Println(r)

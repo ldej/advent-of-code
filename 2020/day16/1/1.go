@@ -24,7 +24,7 @@ type Rule struct {
 }
 
 func run(input string) int {
-	lines := tools.ReadStringsDoubleNewlines(input)
+	lines := tools.ReadStringsDoubleNewlines()
 
 	var rules []Rule
 	runeLines := strings.Split(lines[0], "\n")

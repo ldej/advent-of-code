@@ -19,7 +19,7 @@ type Instruction struct {
 }
 
 func run() int {
-	input := tools.ReadStrings("./2020/day08/input.txt")
+	input := tools.ReadStrings()
 
 	var instructions []Instruction
 

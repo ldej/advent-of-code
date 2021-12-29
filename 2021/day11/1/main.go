@@ -13,7 +13,7 @@ func main() {
 }
 
 func run() int {
-	field := tools.ReadIntGrid("./2021/day11/input.txt")
+	field := tools.ReadIntGrid()
 	totalFlashes := 0
 	for i := 0; i < 100; i++ {
 		newField, flashes := step(field)

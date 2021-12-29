@@ -13,7 +13,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	strs := tools.ReadStrings("./2021/day02/input.txt")
+	strs := tools.ReadStrings()
 
 	position := 0
 	depth := 0

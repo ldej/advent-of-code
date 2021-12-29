@@ -3,23 +3,30 @@ package tools
 import (
 	"io/ioutil"
 	"log"
+	"path/filepath"
 	"regexp"
+	"runtime"
 	"strconv"
 	"strings"
 
 	"github.com/ldej/advent-of-code/tools/myints"
 )
 
-func ReadBytes(location string) []byte {
-	bytes, err := ioutil.ReadFile(location)
+func inputFilePath() string {
+	_, filePath, _, _ := runtime.Caller(2)
+	return filepath.Dir(filepath.Dir(filePath)) + "/input.txt"
+}
+
+func ReadBytes() []byte {
+	bytes, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
 	return bytes
 }
 
-func ReadRegex(location string, regex string) []map[string]string {
-	content, err := ioutil.ReadFile(location)
+func ReadRegex(regex string) []map[string]string {
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -48,10 +55,10 @@ func ReadRegex(location string, regex string) []map[string]string {
 	return results
 }
 
-func ReadInts(location string) []int {
+func ReadInts() []int {
 	var ints []int
 
-	content, err := ioutil.ReadFile(location)
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,14 +76,14 @@ func ReadInts(location string) []int {
 	return ints
 }
 
-func ReadIntSlice(location string) []int {
-	return ReadIntSlices(location)[0]
+func ReadIntSlice() []int {
+	return ReadIntSlices()[0]
 }
 
-func ReadIntSlices(location string) [][]int {
+func ReadIntSlices() [][]int {
 	var result [][]int
 
-	content, err := ioutil.ReadFile(location)
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -98,10 +105,10 @@ func ReadIntSlices(location string) [][]int {
 	return result
 }
 
-func ReadIntCsv(location string) [][]int {
+func ReadIntCsv() [][]int {
 	var result [][]int
 
-	content, err := ioutil.ReadFile(location)
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -125,25 +132,25 @@ func ReadIntCsv(location string) [][]int {
 	return result
 }
 
-func ReadIntCsvOneLine(location string) []int {
-	return ReadIntCsv(location)[0]
+func ReadIntCsvOneLine() []int {
+	return ReadIntCsv()[0]
 }
 
-func ReadString(location string) string {
-	return ReadStrings(location)[0]
+func ReadString() string {
+	return ReadStrings()[0]
 }
 
-func ReadStrings(location string) []string {
-	content, err := ioutil.ReadFile(location)
+func ReadStrings() []string {
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
 	return strings.Split(strings.TrimSuffix(string(content), "\n"), "\n")
 }
 
-func ReadStringSlices(location string) [][]string {
+func ReadStringSlices() [][]string {
 	var result [][]string
-	content, err := ioutil.ReadFile(location)
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -157,9 +164,9 @@ func ReadStringSlices(location string) [][]string {
 	return result
 }
 
-func ReadStringsDoubleNewlines(location string) []string {
+func ReadStringsDoubleNewlines() []string {
 	var result []string
-	content, err := ioutil.ReadFile(location)
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -173,22 +180,25 @@ func ReadStringsDoubleNewlines(location string) []string {
 	return result
 }
 
-func ReadIntGrid(location string) IntGrid {
-	var grid IntGrid
-	content, err := ioutil.ReadFile(location)
+func ReadIntGrid() IntGrid {
+	content, err := ioutil.ReadFile(inputFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
-	lines := strings.Split(string(content), "\n")
-	for _, line := range lines {
-		if len(line) == 0 {
-			continue
+	var lines []string
+	for _, line := range strings.Split(string(content), "\n") {
+		if len(line) > 0 {
+			lines = append(lines, line)
 		}
-		var numbers []int
-		for _, char := range line {
-			numbers = append(numbers, myints.ToInt(string(char)))
+	}
+
+	grid := make(IntGrid, len(lines))
+	for i, line := range lines {
+		numbers := make([]int, len(line))
+		for j, char := range line {
+			numbers[j] = myints.ToInt(string(char))
 		}
-		grid = append(grid, numbers)
+		grid[i] = numbers
 	}
 	return grid
 }

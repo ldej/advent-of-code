@@ -18,7 +18,7 @@ func main() {
 // run1 calculates the sum of the window by adding and subtracting from
 // the current sum.
 func run1() int {
-	ints := tools.ReadInts("./2021/day01/input.txt")
+	ints := tools.ReadInts()
 	increased := 0
 	windowSize := 3
 	start := 0
@@ -43,7 +43,7 @@ func run1() int {
 
 // run2 calculates the sum of the window by summing each window individually
 func run2() int {
-	ints := tools.ReadInts("./2021/day01/input.txt")
+	ints := tools.ReadInts()
 	increased := 0
 	windowSize := 3
 

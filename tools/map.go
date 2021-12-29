@@ -40,3 +40,13 @@ func MapHasKeys(aMap interface{}, keySlice interface{}) bool {
 	}
 	return true
 }
+
+func MapIntValues(i interface{}) []int {
+	var ints []int
+
+	iter := reflect.ValueOf(i).MapRange()
+	for iter.Next() {
+		ints = append(ints, int(iter.Value().Int()))
+	}
+	return ints
+}

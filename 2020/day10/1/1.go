@@ -18,7 +18,7 @@ func main() {
 }
 
 func run(input string) int {
-	ints := tools.ReadInts(input)
+	ints := tools.ReadInts()
 	ints = myints.Prepend(append(ints, myints.MaxSlice(ints)+3), 0)
 
 	diff1 := 0

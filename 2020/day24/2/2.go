@@ -23,7 +23,7 @@ type Point struct {
 }
 
 func run(input string) int {
-	lines := tools.ReadStrings(input)
+	lines := tools.ReadStrings()
 
 	var tiles = make(map[Point]bool)
 	tiles[Point{0, 0}] = true

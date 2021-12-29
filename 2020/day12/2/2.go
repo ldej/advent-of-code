@@ -18,7 +18,7 @@ func main() {
 }
 
 func run(input string) int {
-	lines := tools.ReadStrings(input)
+	lines := tools.ReadStrings()
 
 	positionX := 0
 	positionY := 0

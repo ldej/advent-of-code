@@ -13,7 +13,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	input := tools.ReadStrings("./2021/day10/input.txt")
+	input := tools.ReadStrings()
 
 	var scores []int
 	for _, line := range input {

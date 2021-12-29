@@ -11,7 +11,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int64 {
-	fishes := tools.ReadIntCsvOneLine("./2021/day06/input.txt")
+	fishes := tools.ReadIntCsvOneLine()
 
 	fishCounter := [9]int64{}
 	for _, fish := range fishes {

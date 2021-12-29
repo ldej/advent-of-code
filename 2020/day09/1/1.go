@@ -18,7 +18,7 @@ func main() {
 }
 
 func run(input string, lookBack int) int {
-	ints := tools.ReadInts(input)
+	ints := tools.ReadInts()
 
 	results := myints.Map(ints, func(i, v int) int {
 		if i < lookBack {

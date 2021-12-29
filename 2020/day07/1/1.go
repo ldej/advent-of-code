@@ -14,7 +14,7 @@ func main() {
 }
 
 func run() int {
-	input := tools.ReadStrings("./2020/day07/input.txt")
+	input := tools.ReadStrings()
 
 	bags := BagsMap(input)
 

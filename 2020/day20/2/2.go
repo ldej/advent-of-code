@@ -29,7 +29,7 @@ type Tile struct {
 type Tiles []Tile
 
 func run(input string) int {
-	parts := tools.ReadStringsDoubleNewlines(input)
+	parts := tools.ReadStringsDoubleNewlines()
 
 	var tiles = make(Tiles, len(parts))
 	for i, part := range parts {

@@ -12,7 +12,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	input := tools.ReadIntCsvOneLine("./2021/day07/input.txt")
+	input := tools.ReadIntCsvOneLine()
 
 	min, max := myints.MinAndMax(input)
 

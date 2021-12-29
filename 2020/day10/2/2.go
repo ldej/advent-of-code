@@ -21,7 +21,7 @@ func main() {
 }
 
 func run(input string) int {
-	ints := tools.ReadInts(input)
+	ints := tools.ReadInts()
 
 	possibleValues := make(map[int][]int)
 	possibleValues[0] = []int{1, 2, 3}

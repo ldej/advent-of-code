@@ -16,7 +16,7 @@ func main() {
 type Board [][]map[int]bool
 
 func run() int {
-	input := tools.ReadStringsDoubleNewlines("./2021/day04/input.txt")
+	input := tools.ReadStringsDoubleNewlines()
 	valuesToDraw, boardsInput := myints.ParseCsv(input[0])[0], input[1:]
 
 	var boards []Board

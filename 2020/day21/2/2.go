@@ -25,7 +25,7 @@ type Product struct {
 }
 
 func run(input string) string {
-	lines := tools.ReadStrings(input)
+	lines := tools.ReadStrings()
 
 	var allergens = sets.NewStringSet()
 

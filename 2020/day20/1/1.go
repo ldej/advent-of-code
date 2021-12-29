@@ -21,7 +21,7 @@ func main() {
 }
 
 func run(input string) int {
-	parts := tools.ReadStringsDoubleNewlines(input)
+	parts := tools.ReadStringsDoubleNewlines()
 
 	var tiles = make(map[int]runegrid.RuneGrid)
 	for _, part := range parts {

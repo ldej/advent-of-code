@@ -11,7 +11,7 @@ func main() {
 	fmt.Println(result)
 }
 func run() int {
-	field := tools.ReadIntGrid("./2021/day09/input.txt")
+	field := tools.ReadIntGrid()
 
 	totalRiskLevel := 0
 	for i := 0; i < len(field); i++ {
