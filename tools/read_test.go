@@ -14,12 +14,12 @@ func PrepareFile(name string) func() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = ioutil.WriteFile("../input.txt", file, 0644)
+	err = ioutil.WriteFile("./testdata/input.txt", file, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return func() {
-		err = os.Remove("../input.txt")
+		err = os.Remove("./testdata/input.txt")
 		if err != nil {
 			log.Fatal(err)
 		}

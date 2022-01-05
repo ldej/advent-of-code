@@ -13,6 +13,7 @@ func main() {
 	result := run()
 	fmt.Println(result)
 }
+
 func run() int {
 	input := tools.ReadStrings()
 	polymer, rules := input[0], input[2:]

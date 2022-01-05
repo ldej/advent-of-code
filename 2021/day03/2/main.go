@@ -11,7 +11,7 @@ func main() {
 	result := run()
 	fmt.Println(result)
 }
-func run() int64 {
+func run() int {
 	input := tools.ReadStrings()
 	length := len(input[0])
 

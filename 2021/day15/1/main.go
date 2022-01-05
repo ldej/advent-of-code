@@ -11,6 +11,7 @@ func main() {
 	result := run()
 	fmt.Println(result)
 }
+
 func run() int {
 	cave := tools.ReadIntGrid()
 	graph := dijkstra.NewGraph(cave)

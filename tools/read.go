@@ -3,6 +3,7 @@ package tools
 import (
 	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 	"regexp"
 	"runtime"
@@ -13,8 +14,21 @@ import (
 )
 
 func inputFilePath() string {
-	_, filePath, _, _ := runtime.Caller(2)
-	return filepath.Dir(filepath.Dir(filePath)) + "/input.txt"
+	for i := 0; i < 5; i++ {
+		_, p, _, _ := runtime.Caller(i)
+		if strings.Contains(p, "/tools/") && strings.Contains(p, "_test.go") {
+			d, err := os.Getwd()
+			if err != nil {
+				log.Fatal(err)
+			}
+			return d + "/testdata/input.txt"
+		}
+		if !strings.Contains(p, "/tools/") {
+			return filepath.Dir(filepath.Dir(p)) + "/input.txt"
+		}
+	}
+	log.Fatal("Can't find input.txt")
+	return ""
 }
 
 func ReadBytes() []byte {

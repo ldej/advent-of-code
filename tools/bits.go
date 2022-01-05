@@ -26,10 +26,18 @@ func ToBinaryPadded(input int, size int) string {
 	return fmt.Sprintf("%0*b", size, input)
 }
 
-func BinaryToInt(input string) int64 {
+func BinaryToInt(input string) int {
 	x, err := strconv.ParseInt(input, 2, 64)
 	if err != nil {
 		log.Fatalf("Could not convert %s to int: %v", input, err)
 	}
-	return x
+	return int(x)
+}
+
+func HexToInt(input string) int {
+	x, err := strconv.ParseInt(input, 16, 64)
+	if err != nil {
+		log.Fatalf("Could not convert %s to int: %v", input, err)
+	}
+	return int(x)
 }
