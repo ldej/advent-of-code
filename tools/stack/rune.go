@@ -19,3 +19,11 @@ func (s *RuneStack) Pop() (rune, bool) {
 func (s *RuneStack) Push(a rune) {
 	*s = append(*s, a)
 }
+
+func (s *RuneStack) Peek() (rune, bool) {
+	if s.IsEmpty() {
+		return 0, false
+	}
+	last := len(*s) - 1
+	return (*s)[last], true
+}
