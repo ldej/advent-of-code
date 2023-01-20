@@ -74,12 +74,12 @@ func (g IntGrid) Cells() chan IntCell {
 	ch := make(chan IntCell)
 
 	go func() {
-		for i := 0; i < len(g); i++ {
-			for j := 0; j < len(g[0]); j++ {
+		for y := 0; y < len(g); y++ {
+			for x := 0; x < len(g[0]); x++ {
 				ch <- IntCell{
-					Value: g[i][j],
-					X:     i,
-					Y:     j,
+					Value: g[y][x],
+					X:     x,
+					Y:     y,
 				}
 			}
 		}

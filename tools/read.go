@@ -150,6 +150,29 @@ func ReadIntCsvOneLine() []int {
 	return ReadIntCsv()[0]
 }
 
+func ReadIntDoubleNewlines() [][]int {
+	var results [][]int
+
+	content, err := ioutil.ReadFile(inputFilePath())
+	if err != nil {
+		log.Fatal(err)
+	}
+	blocks := strings.Split(string(content), "\n\n")
+	for _, block := range blocks {
+		if len(block) == 0 {
+			continue
+		}
+		lines := strings.Split(block, "\n")
+		var result []int
+		for _, line := range lines {
+			i, _ := strconv.Atoi(strings.TrimSpace(line))
+			result = append(result, i)
+		}
+		results = append(results, result)
+	}
+	return results
+}
+
 func ReadString() string {
 	return ReadStrings()[0]
 }
