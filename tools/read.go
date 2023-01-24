@@ -16,6 +16,13 @@ import (
 func inputFilePath(file ...string) string {
 	for i := 0; i < 5; i++ {
 		_, p, _, _ := runtime.Caller(i)
+		if strings.Contains(p, "/tools/") && strings.Contains(p, "_test.go") {
+			d, err := os.Getwd()
+			if err != nil {
+				log.Fatal(err)
+			}
+			return path.Join(d, file[0])
+		}
 		if !strings.Contains(p, "/tools/") {
 			dir := filepath.Dir(filepath.Dir(p))
 			if len(file) == 1 {
