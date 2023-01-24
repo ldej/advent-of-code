@@ -1,9 +1,9 @@
 package tools
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"runtime"
@@ -13,34 +13,31 @@ import (
 	"github.com/ldej/advent-of-code/tools/myints"
 )
 
-func inputFilePath() string {
+func inputFilePath(file ...string) string {
 	for i := 0; i < 5; i++ {
 		_, p, _, _ := runtime.Caller(i)
-		if strings.Contains(p, "/tools/") && strings.Contains(p, "_test.go") {
-			d, err := os.Getwd()
-			if err != nil {
-				log.Fatal(err)
-			}
-			return d + "/testdata/input.txt"
-		}
 		if !strings.Contains(p, "/tools/") {
-			return filepath.Dir(filepath.Dir(p)) + "/input.txt"
+			dir := filepath.Dir(filepath.Dir(p))
+			if len(file) == 1 {
+				return path.Join(dir, file[0])
+			}
+			return dir + "/input.txt"
 		}
 	}
 	log.Fatal("Can't find input.txt")
 	return ""
 }
 
-func ReadBytes() []byte {
-	bytes, err := ioutil.ReadFile(inputFilePath())
+func ReadBytes(file ...string) []byte {
+	bytes, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
 	return bytes
 }
 
-func ReadRegex(regex string) []map[string]string {
-	content, err := ioutil.ReadFile(inputFilePath())
+func ReadRegex(regex string, file ...string) []map[string]string {
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -69,10 +66,10 @@ func ReadRegex(regex string) []map[string]string {
 	return results
 }
 
-func ReadInts() []int {
+func ReadInts(file ...string) []int {
 	var ints []int
 
-	content, err := ioutil.ReadFile(inputFilePath())
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -90,14 +87,14 @@ func ReadInts() []int {
 	return ints
 }
 
-func ReadIntSlice() []int {
-	return ReadIntSlices()[0]
+func ReadIntSlice(file ...string) []int {
+	return ReadIntSlices(file...)[0]
 }
 
-func ReadIntSlices() [][]int {
+func ReadIntSlices(file ...string) [][]int {
 	var result [][]int
 
-	content, err := ioutil.ReadFile(inputFilePath())
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -119,10 +116,10 @@ func ReadIntSlices() [][]int {
 	return result
 }
 
-func ReadIntCsv() [][]int {
+func ReadIntCsv(file ...string) [][]int {
 	var result [][]int
 
-	content, err := ioutil.ReadFile(inputFilePath())
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -146,14 +143,14 @@ func ReadIntCsv() [][]int {
 	return result
 }
 
-func ReadIntCsvOneLine() []int {
-	return ReadIntCsv()[0]
+func ReadIntCsvOneLine(file ...string) []int {
+	return ReadIntCsv(file...)[0]
 }
 
-func ReadIntDoubleNewlines() [][]int {
+func ReadIntDoubleNewlines(file ...string) [][]int {
 	var results [][]int
 
-	content, err := ioutil.ReadFile(inputFilePath())
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -173,21 +170,21 @@ func ReadIntDoubleNewlines() [][]int {
 	return results
 }
 
-func ReadString() string {
-	return ReadStrings()[0]
+func ReadString(file ...string) string {
+	return ReadStrings(file...)[0]
 }
 
-func ReadStrings() []string {
-	content, err := ioutil.ReadFile(inputFilePath())
+func ReadStrings(file ...string) []string {
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
 	return strings.Split(strings.TrimSuffix(string(content), "\n"), "\n")
 }
 
-func ReadStringSlices() [][]string {
+func ReadStringSlices(file ...string) [][]string {
 	var result [][]string
-	content, err := ioutil.ReadFile(inputFilePath())
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -201,9 +198,9 @@ func ReadStringSlices() [][]string {
 	return result
 }
 
-func ReadStringsDoubleNewlines() []string {
+func ReadStringsDoubleNewlines(file ...string) []string {
 	var result []string
-	content, err := ioutil.ReadFile(inputFilePath())
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -217,8 +214,8 @@ func ReadStringsDoubleNewlines() []string {
 	return result
 }
 
-func ReadIntGrid() IntGrid {
-	content, err := ioutil.ReadFile(inputFilePath())
+func ReadIntGrid(file ...string) IntGrid {
+	content, err := os.ReadFile(inputFilePath(file...))
 	if err != nil {
 		log.Fatal(err)
 	}

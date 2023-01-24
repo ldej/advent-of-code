@@ -1,3 +1,11 @@
+# Usage `make year=2023`
+
+setup:
+	@mkdir -p $(year)
+	@for i in $(foreach v, $(shell seq 1 25),$(shell printf '%02d' $(v))); do \
+  		cp -r ./template $(year)/day$${i};\
+	done
+
 test:
 	go test -count=1 -v ./tools/...
 

@@ -1,14 +1,14 @@
 package runegrid
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 	"strings"
 )
 
 func Read(location string) RuneGrid {
 	var result RuneGrid
-	content, err := ioutil.ReadFile(location)
+	content, err := os.ReadFile(location)
 	if err != nil {
 		log.Fatal(err)
 	}

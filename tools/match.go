@@ -66,6 +66,11 @@ func FindInt(input string) int {
 	return myints.ToInt(CompiledIntRegex.FindString(input))
 }
 
+// FindIntOr returns the first integer in the input or the backup
+func FindIntOr(input string, or int) int {
+	return myints.ToIntOr(CompiledIntRegex.FindString(input), or)
+}
+
 func FindInts(input string) []int {
 	matches := CompiledIntRegex.FindAllString(input, -1)
 	var ints []int
