@@ -10,10 +10,11 @@ import (
 )
 
 type Graph struct {
-	Nodes         [][]*node
+	Nodes         [][]*Node
 	Min           Coordinates
 	Max           Coordinates
 	PriorityQueue *nodePriorityQueue
+	DistanceF     func(current *Node, neighbor *Node) int
 }
 
 func NewGraph(input [][]int) Graph {
@@ -21,12 +22,15 @@ func NewGraph(input [][]int) Graph {
 		Min:           Coordinates{X: 0, Y: 0},
 		Max:           Coordinates{X: len(input[0]) - 1, Y: len(input) - 1},
 		PriorityQueue: &nodePriorityQueue{},
+		DistanceF: func(current *Node, neighbor *Node) int {
+			return current.Distance + neighbor.Value
+		},
 	}
 	heap.Init(graph.PriorityQueue)
 	for j := 0; j < len(input); j++ {
-		var row []*node
+		var row []*Node
 		for i := 0; i < len(input[j]); i++ {
-			row = append(row, &node{
+			row = append(row, &Node{
 				Position: Coordinates{
 					X: i,
 					Y: j,
@@ -45,15 +49,15 @@ type Coordinates struct {
 	X, Y int
 }
 
-type node struct {
+type Node struct {
 	Position Coordinates
 	Value    int
 	Distance int
 	Visited  bool
 }
 
-func (g *Graph) unvisitedNeighbors(n *node) []*node {
-	var neighbors []*node
+func (g *Graph) unvisitedNeighbors(n *Node) []*Node {
+	var neighbors []*Node
 	if n.Position.X > 0 && !g.Nodes[n.Position.Y][n.Position.X-1].Visited {
 		neighbors = append(neighbors, g.Nodes[n.Position.Y][n.Position.X-1])
 	}
@@ -69,10 +73,10 @@ func (g *Graph) unvisitedNeighbors(n *node) []*node {
 	return neighbors
 }
 
-func (g *Graph) visit(n *node) {
+func (g *Graph) visit(n *Node) {
 	neighbors := g.unvisitedNeighbors(n)
 	for _, neighbor := range neighbors {
-		distance := neighbor.Value + n.Distance
+		distance := g.DistanceF(n, neighbor)
 		if distance < neighbor.Distance {
 			neighbor.Distance = distance
 			// Only unvisited neighbors for which the distance has changed are put in the priority queue
@@ -82,11 +86,11 @@ func (g *Graph) visit(n *node) {
 	n.Visited = true
 }
 
-func (g *Graph) currentNode() *node {
-	// The heap stores which nodes are eligible to be selected as the next current node
-	// The nodes are stored in a priority queue, meaning the node with the shortest tentative distance
+func (g *Graph) currentNode() *Node {
+	// The heap stores which nodes are eligible to be selected as the next current Node
+	// The nodes are stored in a priority queue, meaning the Node with the shortest tentative distance
 	// will always be at the front of the queue.
-	return heap.Pop(g.PriorityQueue).(*node)
+	return heap.Pop(g.PriorityQueue).(*Node)
 }
 
 func (g *Graph) Calculate(start Coordinates, end Coordinates) int {
@@ -103,14 +107,14 @@ func (g *Graph) Calculate(start Coordinates, end Coordinates) int {
 	return -1
 }
 
-type nodePriorityQueue []*node
+type nodePriorityQueue []*Node
 
 func (h nodePriorityQueue) Len() int           { return len(h) }
 func (h nodePriorityQueue) Less(i, j int) bool { return h[i].Distance < h[j].Distance }
 func (h nodePriorityQueue) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
 
 func (h *nodePriorityQueue) Push(x interface{}) {
-	*h = append(*h, x.(*node))
+	*h = append(*h, x.(*Node))
 }
 
 func (h *nodePriorityQueue) Pop() interface{} {

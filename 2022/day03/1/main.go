@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ldej/advent-of-code/tools"
+	"github.com/ldej/advent-of-code/tools/myrunes"
 	"github.com/ldej/advent-of-code/tools/mystrings"
 )
 
@@ -19,11 +20,7 @@ func run() int {
 
 	for _, line := range input {
 		letter := mystrings.Intersection([]string{line[:len(line)/2], line[len(line)/2:]})[0]
-		l := int(letter) - 96
-		if l < 0 {
-			l += 58
-		}
-		score += l
+		score += myrunes.ToInt(letter)
 	}
 	return score
 }

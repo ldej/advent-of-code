@@ -17,7 +17,7 @@ func main() {
 	fmt.Printf("\nFinal:\n%v\n", result)
 }
 
-func run(_ ...string) int {
-	input := tools.ReadStrings()
+func run(file ...string) int {
+	input := tools.ReadStrings(file...)
 	return len(input)
 }

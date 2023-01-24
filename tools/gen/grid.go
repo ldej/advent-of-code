@@ -104,8 +104,8 @@ func (g {{.Name}}Grid) Cells() chan {{.Name}}Cell {
 			for j := 0; j < len(g[0]); j++ {
 				ch <- {{.Name}}Cell{
 					Value: g[i][j],
-					X:     i,
-					Y:     j,
+					X:     j,
+					Y:     i,
 				}
 			}
 		}

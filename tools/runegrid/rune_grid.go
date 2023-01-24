@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/ldej/advent-of-code/tools"
 	"github.com/ldej/advent-of-code/tools/myints"
+	"github.com/ldej/advent-of-code/tools/myrunes"
 )
 
 type RuneGrid [][]rune
@@ -58,6 +60,15 @@ func (g RuneGrid) Count(char rune) int {
 	return count
 }
 
+func (g RuneGrid) Find(char rune) RuneCell {
+	for cell := range g.Cells() {
+		if cell.Value == char {
+			return cell
+		}
+	}
+	return RuneCell{}
+}
+
 func (g RuneGrid) OutOfBounds(x, y int) bool {
 	return x < 0 || y < 0 || x >= len(g) || y >= len(g[0])
 }
@@ -79,8 +90,8 @@ func (g RuneGrid) Cells() chan RuneCell {
 			for j := 0; j < len(g[0]); j++ {
 				ch <- RuneCell{
 					Value: g[i][j],
-					X:     i,
-					Y:     j,
+					X:     j,
+					Y:     i,
 				}
 			}
 		}
@@ -371,4 +382,16 @@ func (g RuneGrid) FlipHorizontal() RuneGrid {
 		newGrid = append(newGrid, row)
 	}
 	return newGrid
+}
+
+func (g RuneGrid) ToIntGrid() tools.IntGrid {
+	var intGrid = make(tools.IntGrid, 0)
+	for i := 0; i < len(g); i++ {
+		var row []int
+		for j := 0; j < len(g[i]); j++ {
+			row = append(row, myrunes.ToInt(g[i][j]))
+		}
+		intGrid = append(intGrid, row)
+	}
+	return intGrid
 }
