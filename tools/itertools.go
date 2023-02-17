@@ -61,9 +61,10 @@ func GenIndexes(maxIndex, numberOfIndexes int) <-chan []int {
 // CombinationsInt generates all the combinations of r elements
 // extracted from an slice of integers
 // use it as a generator:
-// for v := range CombinationsInt(iterable, r) {
-//      fmt.Println(v)
-// }
+//
+//	for v := range CombinationsInt(iterable, r) {
+//	     fmt.Println(v)
+//	}
 func CombinationsInt(iterable []int, length int) chan []int {
 	ch := make(chan []int)
 
@@ -91,7 +92,6 @@ func CombinationsStr(iterable []string, length int) chan []string {
 	ch := make(chan []string)
 
 	go func() {
-
 		for indexes := range GenIndexes(len(iterable), length) {
 			result := make([]string, length)
 			for i, val := range indexes {

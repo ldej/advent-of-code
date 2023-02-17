@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/ldej/advent-of-code/tools"
-	"github.com/ldej/advent-of-code/tools/dijkstra"
 )
 
 func main() {

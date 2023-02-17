@@ -1,15 +1,13 @@
-package dijkstra_test
+package dijkstra
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	"github.com/ldej/advent-of-code/tools/dijkstra"
 )
 
 func TestDijkstra(t *testing.T) {
-	graph := dijkstra.NewGraph([][]int{
+	graph := NewGraph([][]int{
 		{1, 1, 6, 3, 7, 5, 1, 7, 4, 2},
 		{1, 3, 8, 1, 3, 7, 3, 6, 7, 2},
 		{2, 1, 3, 6, 5, 1, 1, 3, 2, 8},
@@ -25,7 +23,7 @@ func TestDijkstra(t *testing.T) {
 }
 
 func TestDijkstraReverse(t *testing.T) {
-	graph := dijkstra.NewGraph([][]int{
+	graph := NewGraph([][]int{
 		{1, 1, 6, 3, 7, 5, 1, 7, 4, 2},
 		{1, 3, 8, 1, 3, 7, 3, 6, 7, 2},
 		{2, 1, 3, 6, 5, 1, 1, 3, 2, 8},

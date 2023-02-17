@@ -60,3 +60,9 @@ func TestStringsUnion(t *testing.T) {
 
 	assert.Equal(t, "thequickbrownfxjmpsvlazydg", string(result))
 }
+
+func TestComplement(t *testing.T) {
+	result := Complement([]string{"a", "b", "c"}, []string{"a", "b"})
+
+	assert.Equal(t, []string{"c"}, result)
+}

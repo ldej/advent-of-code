@@ -5,7 +5,7 @@ import (
 	"math"
 
 	"github.com/ldej/advent-of-code/tools"
-	"github.com/ldej/advent-of-code/tools/dijkstra"
+	"github.com/ldej/advent-of-code/tools/dijkstra/v1"
 	"github.com/ldej/advent-of-code/tools/runegrid"
 )
 

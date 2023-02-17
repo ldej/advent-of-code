@@ -192,3 +192,19 @@ func AppendAll(slices ...[]string) []string {
 	}
 	return result
 }
+
+func Complement(a []string, b []string) []string {
+	var result []string
+	for _, d := range a {
+		var found bool
+		for _, e := range b {
+			if d == e {
+				found = true
+			}
+		}
+		if !found {
+			result = append(result, d)
+		}
+	}
+	return result
+}
