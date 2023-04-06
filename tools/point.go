@@ -25,3 +25,7 @@ func (p *Point) ManhattanDistance(a Point) int {
 	}
 	return x + y
 }
+
+type Point3D struct {
+	X, Y, Z int
+}
